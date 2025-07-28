@@ -7,7 +7,7 @@
     <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 MathJax 脚本 -->
-    <script src="/styles/mathjax-full/es5/tex-mml-chtml.js"></script>
+    <script src="/Static-Blog/styles/mathjax-full/es5/tex-mml-chtml.js"></script>
     <!-- 引入 Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- 配置 Tailwind -->
@@ -51,7 +51,7 @@
   <div class="container mx-auto px-4 py-4 max-w-5xl flex flex-col md:flex-row justify-between items-center">
     <div class="flex justify-between items-center w-full md:w-auto">
       <h1 class="text-2xl font-bold">
-        <a href="/" class="flex items-center space-x-2">
+        <a href="/Static-Blog/" class="flex items-center space-x-2">
           <i class="fa fa-feather text-primary"></i>
           <span>我的静态博客</span>
         </a>
@@ -81,13 +81,13 @@
     
     <!-- 导航菜单 - 右侧对齐，添加justify-end确保右对齐 -->
     <nav id="main-nav" class="hidden md:flex space-x-1 mt-4 md:mt-0 md:order-3 justify-end w-full md:w-auto">
-      <a href="/" class="px-4 py-2 rounded-md text-sm font-medium  hover:bg-primary/10 transition-custom">
+      <a href="/Static-Blog/" class="px-4 py-2 rounded-md text-sm font-medium  hover:bg-primary/10 transition-custom">
         <i class="fa fa-home mr-1"></i>首页
       </a>
-      <a href="/page/1/" class="px-4 py-2 rounded-md text-sm font-medium  hover:bg-primary/10 transition-custom">
+      <a href="/Static-Blog/page/1/" class="px-4 py-2 rounded-md text-sm font-medium  hover:bg-primary/10 transition-custom">
         <i class="fa fa-book mr-1"></i>文章
       </a>
-      <a href="/tags/" class="px-4 py-2 rounded-md text-sm font-medium bg-primary/20 text-primary hover:bg-primary/10 transition-custom">
+      <a href="/Static-Blog/tags/" class="px-4 py-2 rounded-md text-sm font-medium bg-primary/20 text-primary hover:bg-primary/10 transition-custom">
         <i class="fa fa-tags mr-1"></i>标签
       </a>
     </nav>
@@ -110,7 +110,7 @@
     let isInputFocused = false;
     
     // 加载搜索索引
-    fetch('/search.json')
+    fetch('/Static-Blog/search.json')
       .then(response => response.json())
       .then(data => {
         searchIndex = data;
@@ -136,7 +136,7 @@
         searchResults.innerHTML = results.map(item => `
           <div class="search-result-item p-3 border-b border-gray-700 last:border-b-0 rounded-md 
                       hover:bg-gray-800 transition-all duration-200">
-            <h3 class="text-lg font-medium"><a href="/posts/${item.slug}/" 
+            <h3 class="text-lg font-medium"><a href="/Static-Blog/posts/${item.slug}/" 
                      class="text-primary hover:underline hover:text-primary/80">${item.title}</a></h3>
             <p class="text-sm text-gray-400 mt-1">作者: ${item.author || '未知'}</p>
           </div>
@@ -206,7 +206,7 @@
   }
 </script>
 
-<script src="/scripts/search.js"></script>
+<script src="/Static-Blog/scripts/search.js"></script>
     <!-- 博客内容区域 -->
     <main class="container mx-auto px-4 py-8 max-w-6xl">
     <!-- 标签页标题 -->
@@ -228,7 +228,7 @@
         <div class="md:w-2/3">
           <!-- 1. 标题 -->
           <h2 class="text-xl font-bold">
-            <a href="/posts/article (1)/" class="text-dark hover:text-primary transition-custom group-hover:underline">
+            <a href="/Static-Blog/posts/article (1)/" class="text-dark hover:text-primary transition-custom group-hover:underline">
               机器学习中的数学公式测试
             </a>
           </h2>
@@ -252,19 +252,19 @@
           
           <!-- 4. 标签 -->
           <div class="post-tags flex flex-wrap gap-2">
-              <a href="/tags/机器学习/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
+              <a href="/Static-Blog/tags/机器学习/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
                 #机器学习
               </a>
-              <a href="/tags/数学/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
+              <a href="/Static-Blog/tags/数学/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
                 #数学
               </a>
-              <a href="/tags/公式测试/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
+              <a href="/Static-Blog/tags/公式测试/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
                 #公式测试
               </a>
           </div>
           
           <!-- 5. 阅读更多 -->
-          <a href="/posts/article (1)/" class="inline-flex items-center text-primary font-medium mt-4 hover:underline">
+          <a href="/Static-Blog/posts/article (1)/" class="inline-flex items-center text-primary font-medium mt-4 hover:underline">
             阅读更多 <i class="fa fa-angle-right ml-1"></i>
           </a>
         </div>
@@ -378,11 +378,11 @@
           快速链接
         </h3>
         <ul class="space-y-2">
-          <li><a href="/" class="text-gray-400 hover:text-white transition-custom">首页</a></li>
-          <li><a href="/page/1/" class="text-gray-400 hover:text-white transition-custom">文章</a></li>
-          <li><a href="/tags/" class="text-gray-400 hover:text-white transition-custom">标签</a></li>
-          <li><a href="/about/" class="text-gray-400 hover:text-white transition-custom">关于</a></li>
-          <li><a href="/sitemap.xml" class="text-gray-400 hover:text-white transition-custom">站点地图</a></li>
+          <li><a href="/Static-Blog/" class="text-gray-400 hover:text-white transition-custom">首页</a></li>
+          <li><a href="/Static-Blog/page/1/" class="text-gray-400 hover:text-white transition-custom">文章</a></li>
+          <li><a href="/Static-Blog/tags/" class="text-gray-400 hover:text-white transition-custom">标签</a></li>
+          <li><a href="/Static-Blog/about/" class="text-gray-400 hover:text-white transition-custom">关于</a></li>
+          <li><a href="/Static-Blog/sitemap.xml" class="text-gray-400 hover:text-white transition-custom">站点地图</a></li>
         </ul>
       </div>
       
@@ -402,6 +402,6 @@
     </div>
   </div>
 </footer>
-    <script src="/styles/main.js"></script>
+    <script src="/Static-Blog/styles/main.js"></script>
 </body>
 </html>

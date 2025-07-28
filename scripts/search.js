@@ -6,7 +6,7 @@
       let searchIndex = [];
       
       // 加载搜索索引
-      fetch('/search.json')
+      fetch('/Static-Blog/search.json')
         .then(response => response.json())
         .then(data => {
           searchIndex = data;
@@ -30,7 +30,7 @@
         if (results.length > 0) {
           searchResults.innerHTML = results.map(item => `
             <div class="search-result-item">
-              <h3><a href="/posts/${item.slug}/">${item.title}</a></h3>
+              <h3><a href="/Static-Blog/posts/${item.slug}/">${item.title}</a></h3>
               <p>作者: ${item.author || '未知'}</p>
             </div>
           `).join('');

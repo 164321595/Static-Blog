@@ -2,77 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
-      <loc>https://example.com/</loc>
+      <loc>https://example.com/Static-Blog/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/</loc>
+      <loc>https://example.com/Static-Blog/tags/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (3)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (3)/</loc>
       <lastmod>2025-07-27</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/post (1)/</loc>
+      <loc>https://example.com/Static-Blog/posts/post (1)/</loc>
       <lastmod>2025-07-27</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (4)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (4)/</loc>
       <lastmod>2025-07-27</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (2)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (2)/</loc>
       <lastmod>2025-07-27</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/post (2)/</loc>
+      <loc>https://example.com/Static-Blog/posts/post (2)/</loc>
       <lastmod>2025-07-27</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/post (2) copy/</loc>
+      <loc>https://example.com/Static-Blog/posts/post (2) copy/</loc>
       <lastmod>2025-07-27</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (1)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (1)/</loc>
       <lastmod>2025-07-27</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/数学/</loc>
+      <loc>https://example.com/Static-Blog/tags/数学/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/微积分/</loc>
+      <loc>https://example.com/Static-Blog/tags/微积分/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/线性代数/</loc>
+      <loc>https://example.com/Static-Blog/tags/线性代数/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/概率/</loc>
+      <loc>https://example.com/Static-Blog/tags/概率/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/机器学习/</loc>
+      <loc>https://example.com/Static-Blog/tags/机器学习/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/公式测试/</loc>
+      <loc>https://example.com/Static-Blog/tags/公式测试/</loc>
       <lastmod>2025-07-28</lastmod>
     </url>
   
