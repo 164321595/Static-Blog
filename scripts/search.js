@@ -36,7 +36,7 @@
     let isInputFocused = false;
     
     // 加载搜索索引
-    fetch('/search.json')
+    fetch('/Static-Blog/search.json')
       .then(response => {
         if (!response.ok) throw new Error('搜索索引加载失败');
         return response.json();
@@ -99,7 +99,7 @@
           resultItem.style.transitionDelay = `${index * 50}ms`;
           
           resultItem.innerHTML = `
-            <h3 class="text-lg font-medium"><a href="/posts/${item.slug}/" 
+            <h3 class="text-lg font-medium"><a href="/Static-Blog/posts/${item.slug}/" 
                      class="text-primary hover:underline hover:text-primary/80">${highlightMatch(item.title, query)}</a></h3>
             <div class="flex flex-wrap items-center gap-x-4 mt-1 text-sm">
               <p class="text-gray-500 dark:text-gray-400">
