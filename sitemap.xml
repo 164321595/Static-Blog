@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+    <url>
+      <loc>https://example.com/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/tags/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/posts/article (3)/</loc>
+      <lastmod>2025-07-27</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/posts/post (1)/</loc>
+      <lastmod>2025-07-27</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/posts/article (4)/</loc>
+      <lastmod>2025-07-27</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/posts/article (2)/</loc>
+      <lastmod>2025-07-27</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/posts/post (2)/</loc>
+      <lastmod>2025-07-27</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/posts/post (2) copy/</loc>
+      <lastmod>2025-07-27</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/posts/article (1)/</loc>
+      <lastmod>2025-07-27</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/tags/数学/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/tags/微积分/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/tags/线性代数/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/tags/概率/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/tags/机器学习/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/tags/公式测试/</loc>
+      <lastmod>2025-07-28</lastmod>
+    </url>
+  
+</urlset>
