@@ -1,0 +1,287 @@
+<header class="bg-gradient-to-r from-primary to-secondary text-white sticky top-0 z-50 shadow-lg transition-all duration-300 relative overflow-visible">
+  <!-- 粒子容器 -->
+  <div class="header-particles absolute inset-0 z-0"></div>
+  
+  <div class="container mx-auto px-4 py-3 max-w-6xl relative z-10">
+    <!-- 移动端/桌面端通用导航栏 - 强制横向排列 -->
+    <div class="flex items-center justify-between w-full">
+      <!-- Logo区域（强制显示） -->
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <div class="w-10 h-10 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300" 
+             style="box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3);">
+          <canvas id="logo-canvas" width="128" height="128" 
+                  style="width: 40px; height: 40px; display: block;"></canvas>
+        </div>
+        <a href="{{ config.baseUrl }}/" class="text-xl font-bold tracking-tight whitespace-nowrap">
+          {{ config.siteName }}
+        </a>
+      </div>
+      
+      <!-- 搜索框（中间自适应） -->
+      <div class="search-container flex-1 mx-2 max-w-md hidden sm:block">
+        <div class="relative group">
+          <input type="text" id="search-input" placeholder="搜索..." 
+                 class="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-full py-2 pl-8 sm:pl-10 pr-4 text-white text-sm
+                        placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 
+                        transition-all duration-300 group-hover:bg-white/20">
+          <i class="fa fa-search absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-white/80 group-hover:text-white transition-colors"></i>
+          <span class="absolute right-4 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-white/60 rounded-full opacity-0 group-hover:opacity-100 animate-ping"></span>
+        </div>
+        
+        <!-- 搜索结果容器 -->
+        <div id="search-results" class="search-results mt-1 bg-white/95 dark:bg-gray-800/95 rounded-xl shadow-2xl p-2 absolute 
+                                      left-4 right-4 z-500 hidden max-h-96 overflow-y-auto 
+                                      border border-gray-200 dark:border-gray-700">
+        </div>
+      </div>
+      
+      <!-- 右侧功能区（菜单按钮+搜索按钮） -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <!-- 移动端搜索按钮（小屏幕显示） -->
+        <button id="mobile-search-btn" class="sm:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors active:bg-white/20 active:scale-95">
+          <i class="fa fa-search text-xl"></i>
+        </button>
+        
+        <!-- 菜单按钮（移动端显示） -->
+        <button id="menu-toggle" class="md:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors active:bg-white/20 active:scale-95">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+        
+        <!-- 桌面端导航菜单 -->
+        <nav id="main-nav" class="hidden md:flex space-x-1">
+          <a href="{{ config.baseUrl }}/" class="px-4 py-2 rounded-full text-sm font-medium 
+                {% if isHome %}bg-white/20 backdrop-blur-sm shadow-md{% endif %} 
+                hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
+            <i class="fa fa-home"></i>
+            <span class="hidden sm:inline">首页</span>
+          </a>
+          <a href="{{ config.baseUrl }}/page/1/" class="px-4 py-2 rounded-full text-sm font-medium 
+                {% if isPage %}bg-white/20 backdrop-blur-sm shadow-md{% endif %} 
+                hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
+            <i class="fa fa-book"></i>
+            <span class="hidden sm:inline">文章</span>
+          </a>
+          <a href="{{ config.baseUrl }}/tags/" class="px-4 py-2 rounded-full text-sm font-medium 
+                {% if isTag %}bg-white/20 backdrop-blur-sm shadow-md{% endif %} 
+                hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
+            <i class="fa fa-tags"></i>
+            <span class="hidden sm:inline">标签</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- 移动端专用搜索框（默认隐藏，点击搜索按钮显示） -->
+    <div id="mobile-search-container" class="mt-3 hidden">
+      <div class="relative group">
+        <input type="text" id="mobile-search-input" placeholder="搜索文章、标签或作者..." 
+               class="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-full py-2 pl-10 pr-4 text-white
+                      placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 
+                      transition-all duration-300 group-hover:bg-white/20">
+        <i class="fa fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 group-hover:text-white transition-colors"></i>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 移动端菜单（全屏覆盖式） -->
+  <div id="mobileMenu" class="md:hidden bg-gradient-to-b from-primary/95 to-secondary/95 backdrop-blur-lg fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="container mx-auto px-4 py-20 h-full flex flex-col">
+      <div class="flex justify-end mb-10">
+        <button id="menu-close" class="text-white p-2 rounded-full hover:bg-white/10 transition-colors active:bg-white/20 active:scale-95">
+          <i class="fa fa-times text-2xl"></i>
+        </button>
+      </div>
+      <div class="flex flex-col space-y-6 items-center text-center">
+        <a href="{{ config.baseUrl }}/" class="px-8 py-4 rounded-full text-xl font-medium text-white/90 
+              {% if isHome %}bg-white/20 backdrop-blur-sm shadow-md{% endif %} 
+              hover:bg-white/10 transition-all duration-300 w-full max-w-xs">
+          <i class="fa fa-home mr-2"></i>首页
+        </a>
+        <a href="{{ config.baseUrl }}/page/1/" class="px-8 py-4 rounded-full text-xl font-medium text-white/90 
+              {% if isPage %}bg-white/20 backdrop-blur-sm shadow-md{% endif %} 
+              hover:bg-white/10 transition-all duration-300 w-full max-w-xs">
+          <i class="fa fa-book mr-2"></i>文章
+        </a>
+        <a href="{{ config.baseUrl }}/tags/" class="px-8 py-4 rounded-full text-xl font-medium text-white/90 
+              {% if isTag %}bg-white/20 backdrop-blur-sm shadow-md{% endif %} 
+              hover:bg-white/10 transition-all duration-300 w-full max-w-xs">
+          <i class="fa fa-tags mr-2"></i>标签
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 菜单遮罩层 -->
+  <div id="menu-overlay" class="md:hidden fixed inset-0 bg-black/50 z-30 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+</header>
+
+<!-- 高清图标绘制脚本 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const canvas = document.getElementById('logo-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // 书签图标配置
+  const config = {
+    icon: "\uf15c", // 书签图标Unicode
+    iconSize: 72,
+    backgroundColor: ["#165DFF", "#7B61FF"],
+    borderRadius: 24,
+    iconColor: "white",
+    scale: 4
+  };
+  
+  // 绘制高清图标
+  function drawHighResIcon() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // 渐变背景
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, config.backgroundColor[0]);
+    gradient.addColorStop(1, config.backgroundColor[1]);
+    
+    // 圆角矩形背景（抗锯齿处理）
+    ctx.beginPath();
+    const radius = config.borderRadius;
+    ctx.moveTo(radius, 0);
+    ctx.lineTo(canvas.width - radius, 0);
+    ctx.arcTo(canvas.width, 0, canvas.width, radius, radius);
+    ctx.lineTo(canvas.width, canvas.height - radius);
+    ctx.arcTo(canvas.width, canvas.height, canvas.width - radius, canvas.height, radius);
+    ctx.lineTo(radius, canvas.height);
+    ctx.arcTo(0, canvas.height, 0, canvas.height - radius, radius);
+    ctx.lineTo(0, radius);
+    ctx.arcTo(0, 0, radius, 0, radius);
+    ctx.closePath();
+    
+    // 阴影增强立体感
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 2;
+    
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    
+    // 绘制图标
+    ctx.fillStyle = config.iconColor;
+    ctx.font = `normal normal normal ${config.iconSize}px FontAwesome`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(config.icon, canvas.width / 2, canvas.height / 2);
+    
+    // 高光效果
+    const highlight = ctx.createLinearGradient(
+      canvas.width * 0.2, 
+      canvas.height * 0.2, 
+      canvas.width * 0.8, 
+      canvas.height * 0.8
+    );
+    highlight.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+    highlight.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width * 0.35, 0, Math.PI * 2);
+    ctx.fillStyle = highlight;
+    ctx.fill();
+  }
+  
+  // 检查Font Awesome加载状态
+  function isFontAwesomeLoaded() {
+    const testSpan = document.createElement('span');
+    testSpan.innerHTML = '&#xf000;';
+    testSpan.style.fontFamily = 'FontAwesome';
+    testSpan.style.position = 'absolute';
+    testSpan.style.visibility = 'hidden';
+    document.body.appendChild(testSpan);
+    const isLoaded = testSpan.offsetWidth > 0;
+    document.body.removeChild(testSpan);
+    return isLoaded;
+  }
+  
+  // 初始化图标
+  function initIcon() {
+    if (isFontAwesomeLoaded()) {
+      drawHighResIcon();
+    } else {
+      setTimeout(initIcon, 100);
+    }
+  }
+  
+  initIcon();
+  window.addEventListener('resize', drawHighResIcon);
+});
+</script>
+
+<!-- 核心交互脚本 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // 元素获取
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuClose = document.getElementById("menu-close");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const menuOverlay = document.getElementById("menu-overlay");
+  const mobileSearchBtn = document.getElementById("mobile-search-btn");
+  const mobileSearchContainer = document.getElementById("mobile-search-container");
+  
+  // 移动端菜单展开
+  function openMenu() {
+    mobileMenu.classList.remove("translate-x-full");
+    mobileMenu.classList.add("translate-x-0");
+    menuOverlay.classList.remove("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "hidden"; // 禁止背景滚动
+  }
+  
+  // 移动端菜单收起
+  function closeMenu() {
+    mobileMenu.classList.add("translate-x-full");
+    mobileMenu.classList.remove("translate-x-0");
+    menuOverlay.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = ""; // 恢复滚动
+  }
+  
+  // 绑定菜单事件
+  if (menuToggle) menuToggle.addEventListener("click", openMenu);
+  if (menuClose) menuClose.addEventListener("click", closeMenu);
+  if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+  
+  // 移动端搜索框切换
+  if (mobileSearchBtn && mobileSearchContainer) {
+    mobileSearchBtn.addEventListener("click", function() {
+      mobileSearchContainer.classList.toggle("hidden");
+      // 自动聚焦
+      const input = document.getElementById("mobile-search-input");
+      if (input && !mobileSearchContainer.classList.contains("hidden")) {
+        input.focus();
+      }
+    });
+  }
+  
+  // 搜索框同步输入（移动端和桌面端）
+  const desktopSearch = document.getElementById("search-input");
+  const mobileSearch = document.getElementById("mobile-search-input");
+  if (desktopSearch && mobileSearch) {
+    desktopSearch.addEventListener("input", function() {
+      mobileSearch.value = this.value;
+    });
+    mobileSearch.addEventListener("input", function() {
+      desktopSearch.value = this.value;
+    });
+  }
+  
+  // 窗口大小变化时的适配
+  window.addEventListener("resize", function() {
+    // 大屏幕自动关闭菜单和移动端搜索框
+    if (window.innerWidth >= 768) {
+      closeMenu();
+      if (mobileSearchContainer && !mobileSearchContainer.classList.contains("hidden")) {
+        mobileSearchContainer.classList.add("hidden");
+      }
+    }
+  });
+});
+</script>
+
+<!-- 引入搜索脚本 -->
+<script src="{{ config.baseUrl }}/scripts/search.js"></script>
+<script src="{{ config.baseUrl }}/styles/main.js"></script>

@@ -1,0 +1,149 @@
+{% if totalPages and totalPages > 1 %}
+  <div class="pagination flex justify-center mt-12">
+    <nav class="inline-flex rounded-xl shadow-md overflow-hidden" aria-label="Pagination">
+      <!-- 首页 -->
+      {% if currentPage > 1 %}
+        <a href="javascript:void(0)" data-page="1" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          <i class="fa fa-angle-double-left mr-1"></i>
+          首页
+        </a>
+      {% endif %}
+
+      <!-- 上一页 -->
+      {% if currentPage > 1 %}
+        <a href="javascript:void(0)" data-page="{{ currentPage - 1 }}" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          <i class="fa fa-angle-left mr-1"></i>
+          上一页
+        </a>
+      {% endif %}
+
+      <!-- 计算显示的页码范围 -->
+      {% set rangeNum = config.paginationRange | default(3) %}
+      
+      <!-- 计算起始页 -->
+      {% set tempStart = currentPage - rangeNum %}
+      {% set startPage = 1 %}
+      {% if tempStart > 1 %}
+        {% set startPage = tempStart %}
+      {% endif %}
+      
+      <!-- 计算结束页 -->
+      {% set tempEnd = currentPage + rangeNum %}
+      {% set endPage = totalPages %}
+      {% if tempEnd < totalPages %}
+        {% set endPage = tempEnd %}
+      {% endif %}
+
+      <!-- 前省略号 -->
+      {% if startPage > 1 %}
+        <span class="relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-500 bg-white">
+          ...
+        </span>
+      {% endif %}
+
+      <!-- 页码列表 -->
+      {% for page in (startPage | range(endPage)) %}
+        {% if page == currentPage %}
+          <span class="relative inline-flex items-center px-5 py-3 border-0 text-sm font-bold bg-primary text-white shadow-md transform scale-105 z-10">
+            {{ page }}
+          </span>
+        {% else %}
+          <a href="javascript:void(0)" data-page="{{ page }}" class="pagination-link relative inline-flex items-center px-5 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary/10 hover:text-primary transition-all duration-300">
+            {{ page }}
+          </a>
+        {% endif %}
+      {% endfor %}
+
+      <!-- 后省略号 -->
+      {% if endPage < totalPages %}
+        <span class="relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-500 bg-white">
+          ...
+        </span>
+      {% endif %}
+
+      <!-- 下一页 -->
+      {% if currentPage < totalPages %}
+        <a href="javascript:void(0)" data-page="{{ currentPage + 1 }}" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          下一页
+          <i class="fa fa-angle-right ml-1"></i>
+        </a>
+      {% endif %}
+
+      <!-- 末页 -->
+      {% if currentPage < totalPages %}
+        <a href="javascript:void(0)" data-page="{{ totalPages }}" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          末页
+          <i class="fa fa-angle-double-right ml-1"></i>
+        </a>
+      {% endif %}
+    </nav>
+  </div>
+
+  <style>
+    /* 分页样式优化 */
+    .pagination-link {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pagination-link::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.6s ease;
+    }
+    
+    .pagination-link:hover::after {
+      left: 100%;
+    }
+    
+    /* 适配深色模式 */
+    .dark .pagination-link {
+      background: #1f2937;
+      color: #f9fafb;
+    }
+    
+    .dark .pagination-link:hover {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .dark span.relative {
+      background: #1f2937;
+      color: #9ca3af;
+    }
+  </style>
+
+  <script>
+    // 分页链接点击事件处理 - 保持原有功能，添加动画效果
+    document.addEventListener('DOMContentLoaded', function() {
+      const paginationLinks = document.querySelectorAll('.pagination-link');
+      
+      paginationLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          // 添加点击动画
+          this.classList.add('scale-95', 'opacity-70');
+          
+          setTimeout(() => {
+            const page = this.getAttribute('data-page');
+            const currentUrl = window.location.href;
+            
+            // 正则表达式匹配最后一个数字部分
+            const newUrl = currentUrl.replace(/\/(\d+)\/?$/, `/${page}/`);
+            
+            // 如果URL中没有数字，添加分页路径
+            if (newUrl === currentUrl) {
+              window.location.href = currentUrl.replace(/\/?$/, `/page/${page}/`);
+            } else {
+              window.location.href = newUrl;
+            }
+          }, 150); // 匹配动画时长
+        });
+      });
+    });
+  </script>
+{% endif %}

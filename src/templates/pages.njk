@@ -1,0 +1,212 @@
+{% extends "base.njk" %}
+{% set isPage = true %}
+
+{% block title %}{{ config.siteName }} - 文章列表 - 第{{ currentPage }}页{% endblock %}
+
+{% block content %}
+    <!-- 页面标题区 -->
+    <div class="mb-12 relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary/5 to-secondary/5 p-6 md:p-8">
+        <!-- 背景装饰 -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-secondary/10 rounded-full filter blur-3xl"></div>
+        
+        <div class="relative z-10">
+            <h2 class="text-2xl md:text-3xl font-bold flex items-center">
+                <i class="fa fa-file-text-o text-primary mr-3"></i>
+                文章列表
+                <span class="ml-3 text-sm font-normal text-gray-500 bg-white/80 dark:bg-gray-800/80 px-3 py-1 rounded-full">
+                    第{{ currentPage }}页
+                </span>
+            </h2>
+            <p class="text-gray-600 mt-2 max-w-2xl">
+                探索最新的技术文章和观点，发现更多有价值的内容
+            </p>
+            
+            <!-- 统计信息 -->
+            <div class="mt-6 flex flex-wrap gap-4">
+                <div class="flex items-center text-sm">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-2">
+                        <i class="fa fa-pencil text-primary"></i>
+                    </div>
+                    <span>共 {{ stats.totalPosts }} 篇文章</span>
+                </div>
+                <div class="flex items-center text-sm">
+                    <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center mr-2">
+                        <i class="fa fa-star text-secondary"></i>
+                    </div>
+                    <span>精选文章: {{ stats.featuredCount }} 篇</span>
+                </div>
+                <div class="flex items-center text-sm">
+                    <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center mr-2">
+                        <i class="fa fa-tags text-accent"></i>
+                    </div>
+                    <span>{{ stats.totalTags }} 个标签分类</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全部文章内容区（仅保留此区域） -->
+    <div class="content-container">
+        <div class="post-list space-y-8">
+            {# 排序逻辑：精选在前，再按时间排序 #}
+            {% set sortedPosts = [] %}
+            {% set featuredGroup = [] %}
+            {% set regularGroup = [] %}
+            
+            {% for post in posts %}
+                {% if post.featured %}
+                    {% set _ = featuredGroup.push(post) %}
+                {% else %}
+                    {% set _ = regularGroup.push(post) %}
+                {% endif %}
+            {% endfor %}
+            
+            {% for post in featuredGroup %}
+                {% set _ = sortedPosts.push(post) %}
+            {% endfor %}
+            {% for post in regularGroup %}
+                {% set _ = sortedPosts.push(post) %}
+            {% endfor %}
+            
+            {% for post in sortedPosts %}
+                <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 group relative">
+                    {# 精选标识（保留标识，仅移除切换功能） #}
+                    {% if post.featured %}
+                        <div class="absolute top-4 right-4 z-10 bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa fa-star"></i> 精选
+                        </div>
+                    {% endif %}
+                    
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+                    
+                    <div class="p-6 md:p-7">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="md:w-1/4">
+                                <div class="rounded-lg overflow-hidden h-40 md:h-full">
+                                    <img src="{{ (config.baseUrl + post.cover) or (config.defaultCoverImage) }}" 
+                                         alt="{{ post.title }}" 
+                                         class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                                </div>
+                            </div>
+                            <div class="md:w-3/4">
+                                <div class="flex items-center text-sm text-gray-500 mb-3">
+                                    <div class="flex items-center mr-4">
+                                        <i class="fa fa-calendar-o mr-1"></i>
+                                        <span>{{ post.date | date('yyyy年MM月dd日') }}</span>
+                                    </div>
+                                    {% if post.updated %}
+                                        <div class="flex items-center">
+                                            <i class="fa fa-pencil mr-1"></i>
+                                            <span>{{ post.relativeUpdated }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <h2 class="text-xl font-bold mb-3">
+                                    <a href="{{ config.baseUrl }}/posts/{{ post.slug }}/" 
+                                       class="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors group-hover:underline">
+                                        {{ post.title }}
+                                    </a>
+                                </h2>
+                                
+                                <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                                    {{ post.excerpt | safe | striptags | truncate(180) }}
+                                </p>
+                                
+                                <div class="flex flex-wrap items-center justify-between gap-4">
+                                    <div class="post-tags flex flex-wrap gap-2">
+                                        {% if post.tags and post.tags.length > 0 %}
+                                            {% for tag in post.tags.slice(0, 3) %}
+                                                <a href="{{ config.baseUrl }}/tags/{{ tag }}/" 
+                                                   class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                                                    #{{ tag }}
+                                                </a>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <a href="{{ config.baseUrl }}/posts/{{ post.slug }}/" 
+                                       class="text-primary dark:text-primary hover:text-secondary dark:hover:text-secondary flex items-center gap-1 font-medium">
+                                        阅读全文 <i class="fa fa-angle-right transition-transform group-hover:translate-x-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 分隔线 -->
+                {% if not loop.last and loop.index % 3 == 0 %}
+                    <div class="relative my-6">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+                        </div>
+                        <div class="relative flex justify-center text-xs uppercase">
+                            <span class="bg-white dark:bg-gray-900 px-4 py-1 text-gray-500">
+                                <i class="fa fa-star text-accent mr-1"></i> 继续探索 <i class="fa fa-star text-accent ml-1"></i>
+                            </span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 分页 -->
+    <div class="mt-12">
+        {% set baseUrl = config.baseUrl + '/page/' %}
+        {% include "pagination.njk" %}
+    </div>
+    
+    <!-- 装饰性元素 -->
+    <div class="fixed -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="fixed -top-20 -right-20 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+{% endblock %}
+
+{% block extraStyle %}
+    <style>
+        /* 原有样式保持，移除筛选按钮相关样式 */
+        .post-list article:hover {
+            transform: translateY(-3px);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--primary-dark), var(--secondary-dark));
+        }
+        :root {
+            --primary: {{ config.theme.primary or '#3B82F6' }};
+            --primary-dark: {{ config.theme.primaryDark or '#2563EB' }};
+            --secondary: {{ config.theme.secondary or '#F97316' }};
+            --secondary-dark: {{ config.theme.secondaryDark or '#EA580C' }};
+            --accent: {{ config.theme.accent or '#EC4899' }};
+            --accent-dark: {{ config.theme.accentDark or '#db2777' }};
+        }
+    </style>
+{% endblock %}
+
+{% block extraScript %}
+    <!-- 移除筛选相关脚本 -->
+    <script>
+        // 仅保留必要的页面初始化逻辑（如动画）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 文章卡片动画
+            const articles = document.querySelectorAll('.post-list article');
+            articles.forEach((article, index) => {
+                setTimeout(() => {
+                    article.style.opacity = '1';
+                    article.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+{% endblock %}

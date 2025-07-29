@@ -1,0 +1,38 @@
+{
+    "name": "static-blog-generator",
+    "version": "1.0.0",
+    "description": "A static blog generator built with Node.js and TypeScript",
+    "main": "src/build.ts",
+    "scripts": {
+        "build": "ts-node src/build.ts",
+        "serve": "serve dist",
+        "dev": "nodemon --watch src --watch content --watch styles --ext ts,md,css,njk --exec npm run build"
+    },
+    "dependencies": {
+        "date-fns": "^2.29.3",
+        "fs-extra": "^11.1.1",
+        "glob": "^10.2.2",
+        "gray-matter": "^4.0.3",
+        "markdown-it": "^13.0.1",
+        "markdown-it-mathjax3": "^4.3.2",
+        "mathjax-full": "^3.2.2",
+        "nunjucks": "^3.2.4"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.1",
+        "@types/glob": "^8.0.1",
+        "@types/markdown-it": "^12.2.3",
+        "@types/nunjucks": "^3.2.2",
+        "nodemon": "^3.1.10",
+        "serve": "^10.0.2",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
+    },
+    "keywords": [
+        "static-site-generator",
+        "blog",
+        "markdown"
+    ],
+    "author": "酱姆大大",
+    "license": "MIT"
+}

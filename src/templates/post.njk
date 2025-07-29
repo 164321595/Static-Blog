@@ -1,0 +1,179 @@
+{% extends "base.njk" %}
+
+{% block content %}
+    <!-- 装饰性背景元素 -->
+    <div class="fixed -z-10 top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary/5 rounded-full filter blur-3xl"></div>
+    </div>
+
+    <article class="post max-w-4xl mx-auto px-4">
+        <!-- 文章头部装饰条 -->
+        <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mb-8"></div>
+        
+        <!-- 文章标题区（带装饰效果） -->
+        <div class="mb-8 relative">
+            <!-- 标题装饰图标 -->
+            <div class="absolute -top-6 -left-6 text-primary/20 text-6xl">
+                <i class="fa fa-quote-left"></i>
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-bold mb-6 text-balance leading-tight relative z-10">
+                {{ post.title }}
+            </h1>
+            
+            <!-- 文章元信息（卡片式设计） -->
+            <div class="post-meta bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 flex flex-wrap items-center gap-4 text-gray-500 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <i class="fa fa-calendar-o text-primary"></i>
+                    </div>
+                    <span>{{ post.date | date('yyyy年MM月dd日') }}</span>
+                </div>
+                
+                {% if post.updated %}
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
+                            <i class="fa fa-pencil text-secondary"></i>
+                        </div>
+                        <span>{{ post.relativeUpdated }}</span>
+                    </div>
+                {% endif %}
+                
+                {% if post.readingTime %}
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                            <i class="fa fa-clock-o text-accent"></i>
+                        </div>
+                        <span>{{ post.readingTime }} 分钟阅读</span>
+                    </div>
+                {% endif %}
+                
+                {% if post.wordCount %}
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <span>{{ post.wordCount }} 字</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- 文章标签（带悬停动画） -->
+        <div class="post-tags flex flex-wrap gap-2 mb-8">
+            {% for tag in post.tags %}
+                <a href="/tags/{{ tag }}/" class="bg-primary/10 text-primary px-3 py-1.5 rounded-full text-sm hover:bg-primary/20 hover:scale-105 transition-all duration-300 flex items-center gap-1 group">
+                    <i class="fa fa-hashtag text-xs opacity-70 group-hover:opacity-100"></i>
+                    {{ tag }}
+                </a>
+            {% endfor %}
+        </div>
+        
+        <!-- 文章封面图（如果有） -->
+        {% if post.cover %}
+            <div class="mb-10 rounded-xl overflow-hidden shadow-md transform hover:shadow-lg transition-shadow duration-300">
+                <img src="{{ post.cover }}" alt="{{ post.title }}的封面图" class="w-full h-auto object-cover">
+            </div>
+        {% endif %}
+        
+        <!-- 文章内容区（增强样式） -->
+        <div class="post-content prose max-w-none prose-lg prose-a:text-primary prose-a:underline-offset-4 prose-a:hover:underline prose-headings:font-bold prose-headings:text-dark prose-img:rounded-xl prose-img:shadow-md prose-img:mx-auto prose-img:my-8 prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:p-1.5 prose-code:rounded prose-code:text-gray-800 dark:prose-code:text-gray-200 prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:p-4 prose-blockquote:rounded-r-lg prose-hr:border-gray-200 dark:prose-hr:border-gray-700">
+            <div class="prose prose-lg space-y-6">
+                {{ post.content | safe }}
+            </div>
+        </div>
+        
+        <!-- 文章末尾装饰 -->
+        <div class="mt-12 flex justify-center">
+            <div class="w-16 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        </div>
+        
+        <!-- 文章分享区域（增强样式） -->
+        <div class="post-share mt-10 pt-6 border-t border-gray-200 dark:border-gray-700 relative overflow-hidden">
+            <!-- 装饰背景 -->
+            <div class="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            
+            <h3 class="text-gray-700 dark:text-gray-300 mb-5 flex items-center gap-2 text-lg">
+                <i class="fa fa-share-alt text-primary"></i>
+                分享这篇文章
+            </h3>
+            
+            <!-- 分享按钮（美化样式） -->
+            <div class="flex flex-wrap gap-3 relative z-10">
+                <a href="https://twitter.com/intent/tweet?url={{ config.baseUrl }}/posts/{{ post.slug }}/&text={{ post.title }}" target="_blank" rel="noopener" class="share-btn w-10 h-10 rounded-full bg-[#1DA1F2]/10 text-[#1DA1F2] flex items-center justify-center hover:bg-[#1DA1F2]/20 transition-all duration-300 hover:scale-110" aria-label="分享到Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ config.baseUrl }}/posts/{{ post.slug }}/" target="_blank" rel="noopener" class="share-btn w-10 h-10 rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center hover:bg-[#1877F2]/20 transition-all duration-300 hover:scale-110" aria-label="分享到Facebook">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                
+                <a href="javascript:window.open('https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl={{ config.baseUrl }}/posts/{{ post.slug }}/&skey=&device=0&pass_ticket=&op=2', '_blank', 'width=600,height=400')" class="share-btn w-10 h-10 rounded-full bg-[#07C160]/10 text-[#07C160] flex items-center justify-center hover:bg-[#07C160]/20 transition-all duration-300 hover:scale-110" aria-label="分享到微信">
+                    <i class="fa fa-weixin"></i>
+                </a>
+                
+                <a href="https://connect.qq.com/widget/shareqq/index.html?url={{ config.baseUrl }}/posts/{{ post.slug }}/&title={{ post.title }}&summary=&pics=" target="_blank" rel="noopener" class="share-btn w-10 h-10 rounded-full bg-[#12B7F5]/10 text-[#12B7F5] flex items-center justify-center hover:bg-[#12B7F5]/20 transition-all duration-300 hover:scale-110" aria-label="分享到QQ">
+                    <i class="fa fa-qq"></i>
+                </a>
+                
+                <button onclick="navigator.clipboard.writeText('{{ config.baseUrl }}/posts/{{ post.slug }}/').then(() => alert('链接已复制！'))" class="share-btn w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-110" aria-label="复制链接">
+                    <i class="fa fa-link"></i>
+                </button>
+            </div>
+        </div>
+    </article>
+
+    <style>
+        /* 内容区域样式增强 */
+        .post-content p {
+            line-height: 1.8 !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .post-content h2,
+        .post-content h3 {
+            margin-top: 2rem !important;
+            margin-bottom: 1rem !important;
+            padding-bottom: 0.5rem !important;
+            border-bottom: 1px solid #f0f0f0 !important;
+        }
+        
+        .post-content ul, 
+        .post-content ol {
+            margin-bottom: 1.5rem !important;
+            padding-left: 1.5rem !important;
+        }
+        
+        .post-content li {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        /* 动画效果 */
+        .post-content img {
+            transition: transform 0.3s ease;
+        }
+        
+        .post-content img:hover {
+            transform: scale(1.02);
+        }
+    </style>
+
+    <script>
+        // 图片加载动画
+        document.querySelectorAll('.post-content img').forEach(img => {
+            img.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+            
+            img.onload = () => {
+                img.classList.remove('opacity-0');
+                img.classList.add('opacity-100');
+            };
+            
+            // 如果图片已经缓存
+            if (img.complete) {
+                img.classList.remove('opacity-0');
+                img.classList.add('opacity-100');
+            }
+        });
+    </script>
+{% endblock %}
