@@ -2,78 +2,328 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
-      <loc>https://example.com/</loc>
+      <loc>https://example.com/Static-Blog/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/posts/article (12)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (1)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (3)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (7)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/post (1)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (4)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (4)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (20)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (2)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (19)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/post (2)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (13)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/post (2) copy/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (9)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/posts/article (1)/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (8)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/数学/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (6)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/微积分/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (17)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/线性代数/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (16)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/概率/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (15)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/机器学习/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (14)/</loc>
       <lastmod>2025-07-29</lastmod>
     </url>
   
     <url>
-      <loc>https://example.com/tags/公式测试/</loc>
+      <loc>https://example.com/Static-Blog/posts/article (11)/</loc>
       <lastmod>2025-07-29</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/posts/article (10)/</loc>
+      <lastmod>2025-07-29</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/posts/article (22)/</loc>
+      <lastmod>2025-07-29</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/posts/article (23)/</loc>
+      <lastmod>2025-07-29</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/posts/article (21)/</loc>
+      <lastmod>2025-07-29</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/posts/article (5)/</loc>
+      <lastmod>2025-07-29</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/posts/article (18)/</loc>
+      <lastmod>2025-07-29</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/摸鱼技巧/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/电子摆烂/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/程序摸鱼/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/赛博精神病/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/概率暴走/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/游戏黑洞/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/游戏/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/概率/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/生活/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/拖延症/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/最后冲刺/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/火烧眉毛/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/追剧成瘾/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/熬夜看剧/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/剧情上头/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/代码报错/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/程序崩溃/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/程序员崩溃/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/数学/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/概率论/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/统计学/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/游戏成瘾/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/摸鱼打游戏/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/段位至上/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/失眠晚期/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/深夜 emo/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/昼夜颠倒/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/吸猫成瘾/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/猫片狂热/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/云养猫/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/奶茶研究/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/珍珠狂热/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/糖分超标/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/金融数学/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/职场/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/组合数学/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/随机过程/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/机器学习/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/公式测试/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/购物成瘾/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/剁手日常/</loc>
+      <lastmod>2025-07-30</lastmod>
+    </url>
+  
+    <url>
+      <loc>https://example.com/Static-Blog/tags/钱包空空/</loc>
+      <lastmod>2025-07-30</lastmod>
     </url>
   
 </urlset>
