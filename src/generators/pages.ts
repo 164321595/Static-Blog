@@ -4,11 +4,20 @@ import { join } from "path";
 import { compileTemplate } from "../utils/template";
 import { Post } from "./posts";
 import { config } from "../config";
-import { BlogStats } from "./stats"; // 新增
+import { BlogStats } from "./stats";
 
 export async function generatePages(posts: Post[], stats: BlogStats) {
-  // 新增stats参数
-  const totalPages = Math.ceil(posts.length / config.postsPerPage);
+  // 对文章进行排序：精选文章在前，按时间降序排列
+  const sortedPosts = posts.sort((a, b) => {
+    // 精选文章优先
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+
+    // 精选级别相同则按时间降序
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
+  const totalPages = Math.ceil(sortedPosts.length / config.postsPerPage);
 
   console.log(`生成 ${totalPages} 个文章列表页`);
 
@@ -17,12 +26,12 @@ export async function generatePages(posts: Post[], stats: BlogStats) {
   await ensureDir(homeDir);
 
   const homeHtml = await compileTemplate("home", {
-    posts: posts,
+    posts: sortedPosts,
     currentPage: 0,
     totalPages,
     config,
     isHome: true,
-    stats: stats, // 传递统计信息
+    stats: stats,
   });
 
   const homePath = join(homeDir, "index.html");
@@ -34,7 +43,7 @@ export async function generatePages(posts: Post[], stats: BlogStats) {
     const currentPage = i + 1;
     const start = i * config.postsPerPage;
     const end = start + config.postsPerPage;
-    const pagePosts = posts.slice(start, end);
+    const pagePosts = sortedPosts.slice(start, end);
 
     const pageDir = join(config.distDir, "page", `${currentPage}`);
     await ensureDir(pageDir);
@@ -45,7 +54,7 @@ export async function generatePages(posts: Post[], stats: BlogStats) {
       totalPages,
       config,
       isPage: true,
-      stats: stats, // 传递统计信息
+      stats: stats,
     });
 
     const pagePath = join(pageDir, "index.html");

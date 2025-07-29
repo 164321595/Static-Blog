@@ -37,29 +37,7 @@
     <!-- 全部文章区域（仅保留此区域） -->
     <div class="content-container">
         <section class="post-list space-y-8">
-            {# 排序逻辑：精选文章优先 #}
-            {% set sortedTagPosts = [] %}
-            {% set tagFeatured = [] %}
-            {% set tagRegular = [] %}
-            
-            {# 分离精选和非精选 #}
             {% for post in posts %}
-                {% if post.featured %}
-                    {% set _ = tagFeatured.push(post) %}
-                {% else %}
-                    {% set _ = tagRegular.push(post) %}
-                {% endif %}
-            {% endfor %}
-            
-            {# 合并数组（精选在前） #}
-            {% for post in tagFeatured %}
-                {% set _ = sortedTagPosts.push(post) %}
-            {% endfor %}
-            {% for post in tagRegular %}
-                {% set _ = sortedTagPosts.push(post) %}
-            {% endfor %}
-            
-            {% for post in sortedTagPosts %}
                 <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 group relative">
                     {# 精选标识（保留标识） #}
                     {% if post.featured %}

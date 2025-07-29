@@ -1,3 +1,4 @@
+// src/generators/tags.ts
 import { writeFile } from "fs/promises";
 import { ensureDir } from "fs-extra";
 import { join } from "path";
@@ -34,14 +35,17 @@ export async function generateTags(posts: Post[], stats: BlogStats) {
   await ensureDir(join(config.distDir, "tags"));
 
   for (const [tag, taggedPosts] of Object.entries(tagsMap)) {
-    const totalPages = Math.ceil(taggedPosts.length / config.postsPerPage);
+    // 对每个标签下的文章进行排序
+    const sortedPosts = sortPosts(taggedPosts);
+
+    const totalPages = Math.ceil(sortedPosts.length / config.postsPerPage);
 
     // 为每个标签创建分页
     for (let i = 0; i < totalPages; i++) {
       const currentPage = i + 1;
       const start = i * config.postsPerPage;
       const end = start + config.postsPerPage;
-      const pagePosts = taggedPosts.slice(start, end);
+      const pagePosts = sortedPosts.slice(start, end);
 
       const html = await compileTemplate("tag", {
         tag,
@@ -96,4 +100,15 @@ export async function generateTags(posts: Post[], stats: BlogStats) {
   });
 
   await writeFile(join(config.distDir, "tags", "index.html"), html);
+}
+
+// 排序函数
+function sortPosts(posts: Post[]): Post[] {
+  const featuredPosts = posts
+    .filter((post) => post.featured)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const regularPosts = posts
+    .filter((post) => !post.featured)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return [...featuredPosts, ...regularPosts];
 }

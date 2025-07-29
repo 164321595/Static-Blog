@@ -46,32 +46,13 @@
         </div>
     </div>
 
-    <!-- 全部文章内容区（仅保留此区域） -->
+    <!-- 全部文章内容区 -->
     <div class="content-container">
         <div class="post-list space-y-8">
-            {# 排序逻辑：精选在前，再按时间排序 #}
-            {% set sortedPosts = [] %}
-            {% set featuredGroup = [] %}
-            {% set regularGroup = [] %}
-            
+            {# 直接使用已排序的文章（精选在前，时间降序） #}
             {% for post in posts %}
-                {% if post.featured %}
-                    {% set _ = featuredGroup.push(post) %}
-                {% else %}
-                    {% set _ = regularGroup.push(post) %}
-                {% endif %}
-            {% endfor %}
-            
-            {% for post in featuredGroup %}
-                {% set _ = sortedPosts.push(post) %}
-            {% endfor %}
-            {% for post in regularGroup %}
-                {% set _ = sortedPosts.push(post) %}
-            {% endfor %}
-            
-            {% for post in sortedPosts %}
                 <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 group relative">
-                    {# 精选标识（保留标识，仅移除切换功能） #}
+                    {# 精选标识 #}
                     {% if post.featured %}
                         <div class="absolute top-4 right-4 z-10 bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
                             <i class="fa fa-star"></i> 精选
@@ -166,7 +147,6 @@
 
 {% block extraStyle %}
     <style>
-        /* 原有样式保持，移除筛选按钮相关样式 */
         .post-list article:hover {
             transform: translateY(-3px);
         }
@@ -195,9 +175,7 @@
 {% endblock %}
 
 {% block extraScript %}
-    <!-- 移除筛选相关脚本 -->
     <script>
-        // 仅保留必要的页面初始化逻辑（如动画）
         document.addEventListener('DOMContentLoaded', function() {
             // 文章卡片动画
             const articles = document.querySelectorAll('.post-list article');
