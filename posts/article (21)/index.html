@@ -57,7 +57,7 @@
   
   <div class="container mx-auto px-4 py-3 max-w-6xl relative z-10">
     <!-- 移动端/桌面端通用导航栏 - 强制横向排列 -->
-    <div class="flex items-center justify-between w-full">
+    <div class="flex items-center justify-between w-full flex-wrap"> <!-- 添加flex-wrap支持换行 -->
       <!-- Logo区域（强制显示） -->
       <div class="flex items-center gap-3 flex-shrink-0">
         <div class="w-10 h-10 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300" 
@@ -70,8 +70,8 @@
         </a>
       </div>
       
-      <!-- 搜索框（统一显示，自适应宽度） -->
-      <div class="search-container flex-1 mx-2 min-w-[120px]"> <!-- 移除hidden sm:block，添加最小宽度 -->
+      <!-- 搜索框（移动端居中，固定宽度90%） -->
+      <div class="search-container w-full md:flex-1 mx-auto md:mx-2 min-w-[120px] relative max-w-[90%]">
         <div class="relative group">
           <input type="text" id="search-input" placeholder="搜索..." 
                  class="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-full py-2 pl-8 sm:pl-10 pr-4 text-white text-sm
@@ -83,15 +83,17 @@
         
         <!-- 搜索结果容器 -->
         <div id="search-results" class="search-results mt-1 bg-white/95 dark:bg-gray-800/95 rounded-xl shadow-2xl p-2 absolute 
-                                      left-4 right-4 z-500 hidden max-h-96 overflow-y-auto 
-                                      border border-gray-200 dark:border-gray-700">
+                                      z-500 hidden max-h-96 overflow-y-auto 
+                                      border border-gray-200 dark:border-gray-700
+                                      left-1/2 transform -translate-x-1/2  <!-- 初始水平居中 -->
+                                      w-[90vw]  <!-- 初始宽度为视口90% -->
+                                      max-w-6xl  <!-- 最大宽度限制 -->
+                                      mx-auto">
         </div>
       </div>
       
       <!-- 右侧功能区（仅保留菜单按钮） -->
       <div class="flex items-center gap-2 flex-shrink-0">
-        <!-- 移除移动端搜索按钮 -->
-        
         <!-- 菜单按钮（移动端显示） -->
         <button id="menu-toggle" class="md:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors active:bg-white/20 active:scale-95">
           <i class="fa fa-bars text-xl"></i>
@@ -120,9 +122,6 @@
         </nav>
       </div>
     </div>
-    
-    <!-- 移除移动端专用搜索框 -->
-    
   </div>
   
   <!-- 移动端菜单（全屏覆盖式） -->
@@ -255,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-<!-- 核心交互脚本（调整搜索相关部分） -->
+<!-- 核心交互脚本（添加窗口大小变化时更新搜索结果位置的逻辑） -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   // 元素获取
@@ -263,8 +262,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const menuClose = document.getElementById("menu-close");
   const mobileMenu = document.getElementById("mobileMenu");
   const menuOverlay = document.getElementById("menu-overlay");
-  
-  // 移除移动端搜索按钮相关代码
+  const searchInput = document.getElementById("search-input");
+  const searchResults = document.getElementById("search-results");
   
   // 移动端菜单展开
   function openMenu() {
@@ -287,15 +286,47 @@ document.addEventListener("DOMContentLoaded", function() {
   if (menuClose) menuClose.addEventListener("click", closeMenu);
   if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
   
-  // 统一使用一个搜索框，移除移动端/桌面端同步逻辑
+  // 更新搜索结果位置的函数
+  function updateSearchPosition() {
+    if (!searchInput || !searchResults) return;
+    
+    // 获取搜索框的实时位置和尺寸
+    const inputRect = searchInput.getBoundingClientRect();
+    // 获取搜索容器的位置（用于相对定位参考）
+    const containerRect = searchInput.closest('.search-container').getBoundingClientRect();
+    
+    // 计算搜索结果的宽度（小屏幕90%视口，大屏幕与搜索框一致）
+    const isMobile = window.innerWidth < 640;
+    const resultWidth = isMobile ? '90vw' : `${inputRect.width}px`;
+    
+    // 设置搜索结果的位置和尺寸
+    searchResults.style.width = resultWidth;
+    searchResults.style.left = isMobile ? '50%' : `${inputRect.left - containerRect.left}px`;
+    searchResults.style.transform = isMobile ? 'translateX(-50%)' : 'none';
+    searchResults.style.top = `${inputRect.height + 4}px`; // 距离搜索框底部4px
+  }
   
-  // 窗口大小变化时的适配
-  window.addEventListener("resize", function() {
+  // 初始加载时更新位置
+  updateSearchPosition();
+  
+  // 窗口大小变化时更新位置
+  window.addEventListener('resize', function() {
+    updateSearchPosition();
     // 大屏幕自动关闭菜单
     if (window.innerWidth >= 768) {
       closeMenu();
     }
   });
+  
+  // 搜索框聚焦/输入时更新位置（确保动态变化时位置正确）
+  if (searchInput) {
+    searchInput.addEventListener('focus', updateSearchPosition);
+    searchInput.addEventListener('input', updateSearchPosition);
+  }
+  
+  // 搜索脚本加载后可能需要再次更新
+  const observer = new MutationObserver(updateSearchPosition);
+  observer.observe(document.getElementById('search-results'), { childList: true });
 });
 </script>
 
@@ -338,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
                             <i class="fa fa-pencil text-secondary"></i>
                         </div>
-                        <span>大约 3 小时前</span>
+                        <span>大约 4 小时前</span>
                     </div>
                 
                 
