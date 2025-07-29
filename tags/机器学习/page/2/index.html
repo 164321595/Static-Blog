@@ -88,7 +88,7 @@
     <!-- 导航菜单 -->
     <nav id="main-nav" class="hidden md:flex space-x-1 w-full md:w-auto justify-end order-2 md:order-3">
       <a href="/" class="px-4 py-2 rounded-full text-sm font-medium 
-bg-white/20 backdrop-blur-sm shadow-md 
+ 
             hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
         <i class="fa fa-home"></i>
         <span class="hidden sm:inline">首页</span>
@@ -100,7 +100,7 @@ bg-white/20 backdrop-blur-sm shadow-md
         <span class="hidden sm:inline">文章</span>
       </a>
       <a href="/tags/" class="px-4 py-2 rounded-full text-sm font-medium 
- 
+bg-white/20 backdrop-blur-sm shadow-md 
             hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
         <i class="fa fa-tags"></i>
         <span class="hidden sm:inline">标签</span>
@@ -116,13 +116,13 @@ bg-white/20 backdrop-blur-sm shadow-md
   <!-- 移动端菜单 -->
   <div class="md:hidden bg-white/10 backdrop-blur-md absolute w-full left-0 transform -translate-y-full transition-transform duration-300 ease-in-out z-30" id="mobileMenu">
     <div class="container mx-auto px-4 py-4 flex flex-col space-y-3">
-      <a href="/" class="px-4 py-2 rounded-full text-sm font-medium bg-white/20 hover:bg-white/10 transition-colors">
+      <a href="/" class="px-4 py-2 rounded-full text-sm font-medium  hover:bg-white/10 transition-colors">
         <i class="fa fa-home mr-2"></i>首页
       </a>
       <a href="/page/1/" class="px-4 py-2 rounded-full text-sm font-medium  hover:bg-white/10 transition-colors">
         <i class="fa fa-book mr-2"></i>文章
       </a>
-      <a href="/tags/" class="px-4 py-2 rounded-full text-sm font-medium  hover:bg-white/10 transition-colors">
+      <a href="/tags/" class="px-4 py-2 rounded-full text-sm font-medium bg-white/20 hover:bg-white/10 transition-colors">
         <i class="fa fa-tags mr-2"></i>标签
       </a>
     </div>
@@ -230,420 +230,204 @@ document.addEventListener("DOMContentLoaded", function() {
 <script src="/scripts/search.js"></script>
     <!-- 博客内容区域 -->
     <main class="container mx-auto px-4 py-8 max-w-6xl">
-    <!-- 英雄区 -->
-    <section class="hero bg-gradient-to-br from-primary via-primary/90 to-secondary text-white rounded-2xl shadow-2xl mb-12 overflow-hidden relative h-screen flex items-center justify-center">
-      <!-- 背景流动光效 -->
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15)_0%,transparent_50%),radial-gradient(circle_at_70%_60%,rgba(255,255,255,0.1)_0%,transparent_40%)]"></div>
-      
-      <!-- 旋转光晕 -->
-      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10 rounded-full filter blur-[100px] transform translate-x-1/3 -translate-y-1/3 animate-spin-slow"></div>
-      <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/10 rounded-full filter blur-[100px] transform -translate-x-1/3 translate-y-1/3 animate-spin-reverse-slow"></div>
-      
-      <!-- 网格装饰 -->
-      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyNTUuMCI+PHBhdGggZD0iTTEgMUg1OU0xIDExSDU5TTEgMjFIMjlNMzEgMjFIMjlNMSAzMUg1OU0zMSAzMUg1OU0xIDQxSDU5TTMxIDQxSDU5TTEgNTFIMjlNMzEgNTFIMjlNIiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
-      
-      <!-- 粒子容器 -->
-      <div id="particles-container" class="absolute inset-0"></div>
-      
-      <!-- 主要内容 -->
-      <div class="relative z-10 text-center px-4">
-        <h2 class="text-[clamp(2.5rem,8vw,5rem)] font-extrabold leading-tight text-balance mb-6" id="hero-title">
-          我的静态博客
-        </h2>
-        <p class="mt-4 text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10 opacity-0" id="hero-desc">
-          
-        </p>
-        <a href="/page/1/" class="mt-8 inline-flex items-center px-8 py-4 bg-white text-primary font-bold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 opacity-0" id="hero-cta">
-          浏览全部文章
-          <i class="fa fa-arrow-right ml-2"></i>
-        </a>
-      </div>
-      
-      <!-- 滚动指示器 -->
-      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in" style="animation-delay: 2.5s; animation-fill-mode: forwards;">
-        <span class="text-sm mb-2">向下滚动</span>
-        <i class="fa fa-chevron-down animate-bounce text-xl"></i>
-      </div>
-    </section>
-
-    <!-- 自定义动画 -->
-    <style>
-      /* 基础动画 */
-      @keyframes spin-slow {
-        from { transform: translate(50%, -50%) rotate(0deg) scale(1); }
-        to { transform: translate(50%, -50%) rotate(360deg) scale(1.2); }
-      }
-
-      @keyframes spin-reverse-slow {
-        from { transform: translate(-50%, 50%) rotate(0deg) scale(1); }
-        to { transform: translate(-50%, 50%) rotate(-360deg) scale(1.2); }
-      }
-
-      @keyframes fade-in {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      @keyframes float {
-        0%, 100% { transform: translateY(0) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(5deg); }
-      }
-
-      @keyframes pulse {
-        0%, 100% { opacity: 0.6; }
-        50% { opacity: 1; }
-      }
-
-      @keyframes slide-up {
-        from { 
-          opacity: 0;
-          transform: translateY(50px) scale(0.95);
-        }
-        to { 
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      @keyframes letter-pop {
-        0% {
-          opacity: 0;
-          transform: translateY(20px) scale(0.8);
-        }
-        70% {
-          transform: translateY(-5px) scale(1.1);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      /* 应用动画类 */
-      .animate-fade-in {
-        animation: fade-in 0.8s ease forwards;
-      }
-      
-      .animate-slide-up {
-        animation: slide-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      }
-      
-      .letter {
-        display: inline-block;
-        animation: letter-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        opacity: 0;
-      }
-      
-      .particle {
-        position: absolute;
-        background: white;
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0.6;
-      }
-    </style>
-
-    <!-- 精选文章区 -->
-    <section class="featured-posts mb-16 opacity-0" id="featured-section">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-2xl font-bold flex items-center">
-          <i class="fa fa-star text-accent mr-2"></i>精选文章
-        </h3>
-        <a href="/page/1/" class="text-primary hover:underline flex items-center group">
-          查看更多 <i class="fa fa-angle-right ml-1 group-hover:translate-x-1 transition-transform"></i>
-        </a>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-2">
-            <div class="h-48 overflow-hidden">
-              <img src="/styles/images/Cloud.jpg" alt="微积分入门" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-            </div>
-            <div class="p-6">
-              <div class="flex items-center text-sm text-gray-500 mb-3">
-                <i class="fa fa-calendar-o mr-2"></i>
-                <span>2025年07月26日</span>
-                  <span class="ml-4"><i class="fa fa-pencil mr-1"></i> 大约 1 小时前</span>
-              </div>
-              <h2 class="text-xl font-bold mb-3">
-                <a href="/posts/article (3)/" class="text-dark hover:text-primary transition-colors group-hover:underline">
-                  微积分入门
-                </a>
-              </h2>
-              <p class="text-gray-600 mb-4 line-clamp-3">
-                
-              </p>
-              <div class="flex flex-wrap gap-2">
-                  <a href="/tags/数学/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                    #数学
-                  </a>
-                  <a href="/tags/微积分/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                    #微积分
-                  </a>
-              </div>
-            </div>
-          </article>
-      </div>
-    </section>
-
-    <!-- 最新文章区 -->
-    <section class="latest-posts opacity-0" id="latest-section">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-2xl font-bold flex items-center">
-          <i class="fa fa-newspaper-o text-primary mr-2"></i>最新文章
-        </h3>
-        <a href="/page/1/" class="text-primary hover:underline flex items-center group">
-          查看更多 <i class="fa fa-angle-right ml-1 group-hover:translate-x-1 transition-transform"></i>
-        </a>
-      </div>
-      
-<div class="space-y-6">
-   <article class="post-summary bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-custom group">
-    <div class="flex flex-col md:flex-row gap-6">
-        <div class="md:w-1/3">
-            <div class="rounded-lg overflow-hidden h-40 md:h-full">
-<img 
-  src="/styles/images/Cloud.jpg" 
-  alt="微积分入门" 
-  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
->
-            </div>
-        </div>
-        <div class="md:w-2/3">
-            <!-- 1. 标题 -->
-            <h2 class="text-xl font-bold">
-                <a href="/posts/article (3)/" class="text-primary hover:text-secondary transition-custom group-hover:underline">
-                    微积分入门
-                </a>
+    <!-- 标签页标题区（带装饰效果） -->
+    <div class="mb-12 relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary/5 to-secondary/5 p-6 md:p-8">
+        <!-- 背景装饰元素 -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-secondary/10 rounded-full filter blur-3xl"></div>
+        
+        <div class="relative z-10">
+            <h2 class="text-2xl md:text-3xl font-bold flex items-center">
+                <i class="fa fa-tags text-primary mr-3"></i>
+                标签：机器学习
+                <span class="ml-4 text-sm font-normal text-gray-500 bg-white/80 dark:bg-gray-800/80 px-3 py-1 rounded-full">
+                    共 1 篇文章
+                </span>
             </h2>
-            
-            <!-- 2. 发布时间 + 修改时间 -->
-            <div class="post-meta flex items-center text-sm text-gray-500 mt-2 mb-3">
-                <div class="flex items-center mr-4">
-                    <i class="fa fa-calendar-o mr-1"></i>
-                    <span>2025年07月26日</span>
-                </div>
-                    <div class="flex items-center">
-                        <i class="fa fa-pencil mr-1"></i>
-                        <span>大约 1 小时前</span>
-                    </div>
-            </div>
-            
-            <!-- 3. 文章摘要 -->
-            <p class="text-gray-600 mb-4 line-clamp-3 text-lg"> <!-- 增大字体 -->
-                
+            <p class="text-gray-600 mt-2 max-w-2xl">
+                包含标签 <strong class="text-primary">机器学习</strong> 的相关文章
             </p>
             
-            <!-- 4. 标签 -->
-            <div class="post-tags flex flex-wrap gap-2">
-                    <a href="/tags/数学/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
-                        #数学
-                    </a>
-                    <a href="/tags/微积分/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-custom">
-                        #微积分
-                    </a>
+            <!-- 标签云微缩展示 -->
+            <div class="mt-6 flex flex-wrap gap-2">
             </div>
-            
-            <!-- 5. 阅读更多 -->
-            <a href="/posts/article (3)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
-                阅读更多 <i class="fa fa-angle-right ml-1"></i>
-            </a>
         </div>
     </div>
-</article>  </div>    </section>
 
-   <script>
-  // 文字拆分动画 - 优化版
-  document.addEventListener('DOMContentLoaded', () => {
-    const heroTitle = document.getElementById('hero-title');
-    const originalText = heroTitle.textContent;
-    heroTitle.textContent = '';
+    <!-- 文章列表（带装饰分隔） -->
+    <section class="post-list space-y-8">
+            <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 group relative">
+                <!-- 左侧色条装饰 -->
+                <div class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div class="p-6 md:p-7 flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/4">
+                        <div class="rounded-lg overflow-hidden h-40 md:h-56">
+                            <img src="/styles/images/Cloud.jpg" 
+                                 alt="机器学习学" 
+                                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-3/4">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <i class="fa fa-calendar-o mr-2 text-primary/70"></i>
+                            <span>2025年07月12日</span>
+                        </div>
+                        
+                        <h2 class="text-xl font-bold mb-3">
+                            <a href="/posts/post (2) copy/" 
+                               class="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors group-hover:underline">
+                                机器学习学
+                            </a>
+                        </h2>
+                        
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                            
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="post-tags flex gap-1 text-sm">
+                                    <span class="text-primary/70">#机器学习</span>
+                                    <span class="text-primary/70">#数学</span>
+                            </div>
+                            
+                            <a href="/posts/post (2) copy/" 
+                               class="text-primary dark:text-primary hover:text-secondary dark:hover:text-secondary flex items-center gap-1">
+                                阅读全文 <i class="fa fa-angle-right ml-1 transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- 装饰性分隔线 -->
+    </section>
+
+    <!-- 分页导航（修正语法错误） -->
+        <div class="mt-12 text-center">
+  <div class="pagination flex justify-center mt-12">
+    <nav class="inline-flex rounded-xl shadow-md overflow-hidden" aria-label="Pagination">
+      <!-- 首页 -->
+        <a href="javascript:void(0)" data-page="1" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          <i class="fa fa-angle-double-left mr-1"></i>
+          首页
+        </a>
+
+      <!-- 上一页 -->
+        <a href="javascript:void(0)" data-page="1" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          <i class="fa fa-angle-left mr-1"></i>
+          上一页
+        </a>
+
+      <!-- 计算显示的页码范围 -->
+      
+      <!-- 计算起始页 -->
+      
+      <!-- 计算结束页 -->
+
+      <!-- 前省略号 -->
+
+      <!-- 页码列表 -->
+          <a href="javascript:void(0)" data-page="1" class="pagination-link relative inline-flex items-center px-5 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary/10 hover:text-primary transition-all duration-300">
+            1
+          </a>
+          <span class="relative inline-flex items-center px-5 py-3 border-0 text-sm font-bold bg-primary text-white shadow-md transform scale-105 z-10">
+            2
+          </span>
+          <a href="javascript:void(0)" data-page="3" class="pagination-link relative inline-flex items-center px-5 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary/10 hover:text-primary transition-all duration-300">
+            3
+          </a>
+
+      <!-- 后省略号 -->
+
+      <!-- 下一页 -->
+        <a href="javascript:void(0)" data-page="3" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          下一页
+          <i class="fa fa-angle-right ml-1"></i>
+        </a>
+
+      <!-- 末页 -->
+        <a href="javascript:void(0)" data-page="3" class="pagination-link relative inline-flex items-center px-4 py-3 border-0 text-sm font-medium text-gray-700 bg-white hover:bg-primary hover:text-white transition-all duration-300">
+          末页
+          <i class="fa fa-angle-double-right ml-1"></i>
+        </a>
+    </nav>
+  </div>
+
+  <style>
+    /* 分页样式优化 */
+    .pagination-link {
+      position: relative;
+      overflow: hidden;
+    }
     
-    // 拆分文字为单个字符并添加动画（加快节奏）
-    originalText.split('').forEach((char, index) => {
-      const span = document.createElement('span');
-      span.className = 'letter';
-      span.style.animationDelay = `${0.07 * index}s`; // 缩短延迟间隔，加快文字弹出速度
-      span.textContent = char === ' ' ? '\u00A0' : char;
-      heroTitle.appendChild(span);
-    });
+    .pagination-link::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.6s ease;
+    }
     
-    // 其他元素动画（缩短延迟）
-    setTimeout(() => {
-      document.getElementById('hero-desc').classList.add('animate-slide-up');
-    }, 500); // 从800ms缩短到500ms
+    .pagination-link:hover::after {
+      left: 100%;
+    }
     
-    setTimeout(() => {
-      document.getElementById('hero-cta').classList.add('animate-slide-up');
-    }, 900); // 从1300ms缩短到900ms
+    /* 适配深色模式 */
+    .dark .pagination-link {
+      background: #1f2937;
+      color: #f9fafb;
+    }
     
-    // 滚动触发区域动画（增加交错效果）
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          // 增加区域入场延迟，形成层次感
+    .dark .pagination-link:hover {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .dark span.relative {
+      background: #1f2937;
+      color: #9ca3af;
+    }
+  </style>
+
+  <script>
+    // 分页链接点击事件处理 - 保持原有功能，添加动画效果
+    document.addEventListener('DOMContentLoaded', function() {
+      const paginationLinks = document.querySelectorAll('.pagination-link');
+      
+      paginationLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          // 添加点击动画
+          this.classList.add('scale-95', 'opacity-70');
+          
           setTimeout(() => {
-            entry.target.classList.add('animate-slide-up');
-            observer.unobserve(entry.target);
-          }, index * 300);
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    observer.observe(document.getElementById('featured-section'));
-    observer.observe(document.getElementById('latest-section'));
-    
-    // 创建增强版粒子效果
-    createEnhancedParticles();
-  });
-  
-  // 增强版粒子效果生成函数（速度更明显）
-  function createEnhancedParticles() {
-    const container = document.getElementById('particles-container');
-    const count = 70; // 增加粒子数量，增强视觉密度
-    
-    // 粒子大小范围分组（让粒子层次更丰富）
-    const sizeRanges = [
-      { min: 1, max: 3, count: Math.floor(count * 0.5) },  // 小粒子（50%）
-      { min: 3, max: 6, count: Math.floor(count * 0.3) },  // 中粒子（30%）
-      { min: 6, max: 10, count: count - Math.floor(count * 0.5) - Math.floor(count * 0.3) }  // 大粒子（20%）
-    ];
-    
-    let particleIndex = 0;
-    
-    // 按大小分组生成粒子
-    sizeRanges.forEach(range => {
-      for (let i = 0; i < range.count; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // 随机属性（加快速度，增强视觉效果）
-        const size = Math.random() * (range.max - range.min) + range.min;
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        const duration = Math.random() * 2 + 3; // 速度加快：4-10s（原10-25s）
-        const delay = Math.random() * 3; // 缩短延迟：0-3s
-        const opacity = Math.random() * 0.6 + 0.3; // 提高透明度：0.3-0.9
-        const isFloating = Math.random() > 0.3; // 70%粒子有横向移动
-        
-        // 应用样式
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${x}%`;
-        particle.style.top = `${y}%`;
-        particle.style.opacity = opacity;
-        particle.style.animation = isFloating 
-          ? `float ${duration}s ease-in-out infinite ${delay}s, drift ${(duration * 2) + Math.random() * 5}s ease-in-out infinite ${delay + 1}s`
-          : `float ${duration}s ease-in-out infinite ${delay}s`;
-        
-        // 随机添加发光效果
-        if (Math.random() > 0.7) {
-          particle.style.boxShadow = `0 0 ${size * 2}px rgba(255, 255, 255, 0.6)`;
-        }
-        
-        container.appendChild(particle);
-        particleIndex++;
-      }
-    });
-  }
-  
-  // 为文章列表项添加动画（增强交错效果）
-  document.addEventListener('DOMContentLoaded', () => {
-    const postItems = document.querySelectorAll('.post-summary');
-    postItems.forEach((item, index) => {
-      item.classList.add('opacity-0');
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // 动态调整延迟，让动画更有节奏感
-            const delay = index % 2 === 0 ? index * 80 : index * 120;
-            setTimeout(() => {
-              entry.target.classList.add('animate-slide-up');
-              // 添加缩放效果增强灵动性
-              entry.target.style.transform = 'scale(0.95)';
-              setTimeout(() => {
-                entry.target.style.transform = 'scale(1)';
-              }, 100);
-              observer.unobserve(entry.target);
-            }, delay);
-          }
+            const page = this.getAttribute('data-page');
+            const currentUrl = window.location.href;
+            
+            // 正则表达式匹配最后一个数字部分
+            const newUrl = currentUrl.replace(/\/(\d+)\/?$/, `/${page}/`);
+            
+            // 如果URL中没有数字，添加分页路径
+            if (newUrl === currentUrl) {
+              window.location.href = currentUrl.replace(/\/?$/, `/page/${page}/`);
+            } else {
+              window.location.href = newUrl;
+            }
+          }, 150); // 匹配动画时长
         });
-      }, { threshold: 0.1 });
-      
-      observer.observe(item);
+      });
     });
-  });
-</script>
-
-<!-- 增强动画样式 -->
-<style>
-  /* 加快文字弹出动画 */
-  @keyframes letter-pop {
-    0% {
-      opacity: 0;
-      transform: translateY(20px) scale(0.8);
-    }
-    70% {
-      transform: translateY(-3px) scale(1.1); /* 增强弹跳感 */
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
+  </script>
   
-  /* 增强上浮动画 */
-  @keyframes slide-up {
-    from { 
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-    }
-    to { 
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-  
-  /* 粒子浮动动画（增强幅度） */
-  @keyframes float {
-    0%, 100% { 
-      transform: translateY(0) rotate(0deg);
-    }
-    50% { 
-      transform: translateY(-20px) rotate(10deg); /* 加大浮动幅度和旋转角度 */
-    }
-  }
-  
-  /* 粒子横向漂移动画 */
-  @keyframes drift {
-    0%, 100% { 
-      transform: translateX(0);
-    }
-    50% { 
-      transform: translateX(15px); /* 增加横向移动，增强动感 */
-    }
-  }
-  
-  /* 应用动画类 */
-  .animate-slide-up {
-    animation: slide-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-  
-  .letter {
-    display: inline-block;
-    animation: letter-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    opacity: 0;
-  }
-  
-  .particle {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    pointer-events: none;
-    transition: all 0.3s ease;
-  }
-</style>
+        </div>
+    
+    <!-- 装饰性元素 -->
+    <div class="fixed -bottom-20 -right-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="fixed -top-20 -left-20 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl pointer-events-none"></div>
     </main>
 
     <!-- 引入独立页脚 -->
