@@ -1,0 +1,45 @@
+/* 搜索列表 */
+
+.search-container {
+    position: relative;
+}
+
+#search-input {
+    padding: 5px 10px;
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    /* 设置宽度，这里可以根据需要调整 */
+    width: 300px;
+    /* 水平居中 */
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    z-index: 100;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.search-result-item h3 {
+    margin: 0 0 5px;
+    font-size: 1rem;
+}
+
+.search-result-item p {
+    margin: 0;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
