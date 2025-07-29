@@ -1,7 +1,7 @@
 ---
 title: "古典概率的测度论基础"
-date: 2025-08-01
-updated: 2025-08-02
+date: 2025-07-01
+updated: 2025-07-12
 tags: [数学, 概率论]
 author: "测度论专家"
 cover: "/styles/images/Cloud.jpg"

@@ -1,7 +1,7 @@
 ---
 title: "生日悖论的组合证明"
-date: 2025-08-11
-updated: 2025-08-12
+date: 2025-06-11
+updated: 2025-07-12
 tags: [组合数学]
 author: "组合教授"
 cover: "/styles/images/Cloud.jpg"

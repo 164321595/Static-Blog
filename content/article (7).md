@@ -1,7 +1,7 @@
 ---
 title: "非洲人的抽卡概率证明"
-date: 2025-08-03
-updated: 2025-08-04
+date: 2025-07-21
+updated: 2025-07-24
 tags: [游戏, 概率]
 author: "非酋研究员"
 cover: "/styles/images/Cloud.jpg"

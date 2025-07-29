@@ -1,7 +1,7 @@
 ---
 title: "外卖等待时间的随机过程"
-date: 2025-08-07
-updated: 2025-08-08
+date: 2025-07-07
+updated: 2025-07-08
 tags: [生活, 数学]
 author: "吃货概率学家"
 cover: "/styles/images/Cloud.jpg"

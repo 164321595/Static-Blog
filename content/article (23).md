@@ -1,7 +1,7 @@
 ---
 title: "马尔可夫链的平稳分布"
-date: 2025-08-09
-updated: 2025-08-10
+date: 2025-05-09
+updated: 2025-06-10
 tags: [随机过程]
 author: "马尔可夫大师"
 cover: "/styles/images/Cloud.jpg"

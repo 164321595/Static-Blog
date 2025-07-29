@@ -1,7 +1,7 @@
 ---
 title: "大数定律的收敛模式"
-date: 2025-08-05
-updated: 2025-08-06
+date: 2025-07-05
+updated: 2025-07-06
 tags: [概率论, 统计学]
 author: "统计学家"
 cover: "/styles/images/Cloud.jpg"

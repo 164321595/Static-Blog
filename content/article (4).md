@@ -1,7 +1,7 @@
 ---
 title: "恋爱概率学：女神微笑的贝叶斯分析"
-date: 2025-07-30
-updated: 2025-07-31
+date: 2025-07-21
+updated: 2025-07-22
 tags: [概率, 生活]
 author: "恋爱数学家"
 cover: "/styles/images/Cloud.jpg"

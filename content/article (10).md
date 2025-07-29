@@ -1,7 +1,7 @@
 ---
 title: "摸鱼被发现的生存分析"
-date: 2025-08-13
-updated: 2025-08-14
+date: 2025-06-13
+updated: 2025-06-14
 tags: [职场, 概率]
 author: "摸鱼学教授"
 cover: "/styles/images/Cloud.jpg"
