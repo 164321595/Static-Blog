@@ -51,57 +51,15 @@
 </head>
 <body class="font-sans bg-light text-dark antialiased">
     <!-- 引入独立页眉 -->
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <!-- 视口设置：解决移动端布局基础问题 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>酱姆(≧∇≦)ﾉ</title>
-  <!-- 引入FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- 自定义样式 -->
-  <style>
-    /* 基础样式 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    /* 响应式搜索结果样式 */
-    @media (max-width: 640px) {
-      .search-container {
-        max-width: 90vw !important;
-        margin: 0 auto !important;
-      }
-      
-      #search-results {
-        width: 90vw !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-      }
-    }
-    
-    @media (min-width: 641px) {
-      #search-results {
-        width: 100% !important;
-        left: 0 !important;
-        transform: none !important;
-      }
-    }
-  </style>
-</head>
-<body>
 <header class="bg-gradient-to-r from-primary to-secondary text-white sticky top-0 z-50 shadow-lg transition-all duration-300 relative overflow-visible">
   <!-- 粒子容器 -->
   <div class="header-particles absolute inset-0 z-0"></div>
   
   <div class="container mx-auto px-4 py-3 max-w-6xl relative z-10">
-    <!-- 移动端/桌面端通用导航栏 - 强制横向排列 -->
-    <div class="flex items-center justify-between w-full flex-wrap">
-      <!-- Logo区域（强制显示） -->
-      <div class="flex items-center gap-3 flex-shrink-0">
+    <!-- 导航栏容器：移动端换行，桌面端不换行 -->
+    <div class="flex items-center justify-between w-full flex-wrap md:flex-nowrap gap-2">
+      <!-- Logo区域（第一行左侧 - 移动端和桌面端一致） -->
+      <div class="flex items-center gap-3 flex-shrink-0 order-1 md:order-1">
         <div class="w-10 h-10 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300" 
              style="box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3);">
           <canvas id="logo-canvas" width="128" height="128" 
@@ -112,8 +70,11 @@
         </a>
       </div>
       
-      <!-- 搜索框（移动端居中，固定宽度90%） -->
-      <div class="search-container w-full md:flex-1 mx-auto md:mx-2 min-w-[120px] relative max-w-[90%]">
+      <!-- 搜索框：移动端第二行，桌面端中间 -->
+      <div class="search-container 
+                  w-full max-w-[90%] mx-auto  <!-- 移动端：占满第二行，居中 -->
+                  md:w-auto md:flex-1 md:mx-4 md:order-2  <!-- 桌面端：中间弹性宽度 -->
+                  relative order-3">
         <div class="relative group">
           <input type="text" id="search-input" placeholder="搜索..." 
                  class="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-full py-2 pl-8 sm:pl-10 pr-4 text-white text-sm
@@ -125,19 +86,21 @@
         
         <!-- 搜索结果容器 -->
         <div id="search-results" class="search-results mt-1 bg-white/95 dark:bg-gray-800/95 rounded-xl shadow-2xl p-2 absolute 
-                                      z-500 hidden max-h-96 overflow-y-auto overflow-x-hidden  <!-- 防止水平溢出 -->
+                                      z-500 hidden max-h-96 overflow-y-auto overflow-x-hidden
                                       border border-gray-200 dark:border-gray-700">
         </div>
       </div>
       
-      <!-- 右侧功能区（仅保留菜单按钮） -->
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <!-- 菜单按钮（移动端显示） -->
+      <!-- 右侧功能区：移动端第一行右侧，桌面端右侧 -->
+      <div class="flex items-center gap-2 flex-shrink-0 
+                  order-2 md:order-3  <!-- 移动端：第一行右侧；桌面端：第三顺位（最右侧） -->
+                  justify-end">  <!-- 确保内容靠右对齐 -->
+        <!-- 菜单按钮（仅移动端显示） -->
         <button id="menu-toggle" class="md:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors active:bg-white/20 active:scale-95">
           <i class="fa fa-bars text-xl"></i>
         </button>
         
-        <!-- 桌面端导航菜单 -->
+        <!-- 桌面端导航菜单（仅桌面端显示） -->
         <nav id="main-nav" class="hidden md:flex space-x-1">
           <a href="/Static-Blog/" class="px-4 py-2 rounded-full text-sm font-medium 
  
@@ -309,7 +272,6 @@ document.addEventListener("DOMContentLoaded", function() {
     mobileMenu.classList.add("translate-x-0");
     menuOverlay.classList.remove("opacity-0", "pointer-events-none");
     document.body.style.overflow = "hidden";
-    // 关闭搜索结果（避免菜单和搜索结果同时显示）
     closeSearchResults();
   }
   
@@ -321,21 +283,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.overflow = "";
   }
   
-  // 关闭搜索结果并清除样式（解决网页变宽核心函数）
+  // 关闭搜索结果并清除样式
   function closeSearchResults() {
     if (!searchResults) return;
-    
-    // 隐藏搜索结果
     searchResults.classList.add('hidden');
-    
-    // 关键修复：清除所有动态样式，避免残留影响布局
     searchResults.removeAttribute('style');
-    searchResults.style.width = '';
-    searchResults.style.left = '';
-    searchResults.style.transform = '';
-    searchResults.style.top = '';
-    
-    // 修复移动端视口异常
     document.documentElement.style.zoom = '1';
     document.body.scrollLeft = 0;
   }
@@ -346,20 +298,20 @@ document.addEventListener("DOMContentLoaded", function() {
     
     const inputRect = searchInput.getBoundingClientRect();
     const containerRect = searchInput.closest('.search-container').getBoundingClientRect();
-    const isMobile = window.innerWidth < 640;
+    const isMobile = window.innerWidth < 768; // 与md断点一致
     
-    // 基础位置设置
     searchResults.style.top = `${inputRect.height + 4}px`;
     searchResults.style.maxHeight = '384px';
     
-    // 响应式宽度调整
     if (isMobile) {
-      searchResults.style.width = '90vw';
+      // 移动端：搜索结果与搜索栏同宽，居中
+      searchResults.style.width = `${inputRect.width}px`;
       searchResults.style.left = '50%';
       searchResults.style.transform = 'translateX(-50%)';
     } else {
+      // 桌面端：搜索结果与搜索栏同宽，左对齐
       searchResults.style.width = `${inputRect.width}px`;
-      searchResults.style.left = `${inputRect.left - containerRect.left}px`;
+      searchResults.style.left = '0';
       searchResults.style.transform = 'none';
     }
   }
@@ -371,7 +323,6 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // 搜索框事件
   if (searchInput) {
-    // 聚焦时显示并更新位置
     searchInput.addEventListener('focus', function() {
       if (searchResults) {
         searchResults.classList.remove('hidden');
@@ -379,14 +330,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
     
-    // 失焦时关闭（延迟确保点击结果有效）
     searchInput.addEventListener("blur", function() {
       if (searchResults && !searchResults.contains(event.relatedTarget)) {
         setTimeout(closeSearchResults, 200);
       }
     });
     
-    // 输入时更新位置
     searchInput.addEventListener('input', updateSearchPosition);
   }
   
@@ -396,17 +345,13 @@ document.addEventListener("DOMContentLoaded", function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       updateSearchPosition();
-      // 大屏自动关闭菜单
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 768) { // 与md断点一致
         closeMenu();
       }
     }, 100);
   });
   
-  // 页面滚动时更新位置
   window.addEventListener('scroll', updateSearchPosition);
-  
-  // 初始加载时检查
   updateSearchPosition();
 });
 </script>
@@ -414,8 +359,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- 引入搜索脚本 -->
 <script src="/Static-Blog/scripts/search.js"></script>
 <script src="/Static-Blog/styles/main.js"></script>
-</body>
-</html>
     <!-- 博客内容区域 -->
     <main class="container mx-auto px-4 py-8 max-w-6xl">
   <!-- 背景装饰元素 -->
