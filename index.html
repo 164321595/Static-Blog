@@ -474,8 +474,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     </style>
 
-     <!-- 精选文章区（使用配置中的数量） -->
-    <section class="featured-posts mb-16 opacity-0" id="featured-section">
+     <section class="featured-posts mb-16 opacity-0" id="featured-section">
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-2xl font-bold flex items-center">
           <i class="fa fa-star text-accent mr-2"></i>精选文章
@@ -488,47 +487,17 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
           <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-2">
-            <!-- 文章内容（保持不变） -->
-            <div class="h-48 overflow-hidden">
-              <img src="/Static-Blog/styles/images/Cloud.jpg" alt="【电子错乱】AI 的摸鱼行为分析报告" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-            </div>
-            <div class="p-6">
-              <div class="flex items-center text-sm text-gray-500 mb-3">
-                <i class="fa fa-calendar-o mr-2"></i>
-                <span>2025年07月27日</span>
-                  <span class="ml-4"><i class="fa fa-pencil mr-1"></i> 大约 18 小时前</span>
-              </div>
-              <h2 class="text-xl font-bold mb-3">
-                <a href="/Static-Blog/posts/article (12)/" class="text-dark hover:text-primary transition-colors group-hover:underline">
-                  【电子错乱】AI 的摸鱼行为分析报告
-                </a>
-              </h2>
-              <p class="text-gray-600 mb-4 line-clamp-3">
-                
-              </p>
-              <div class="flex flex-wrap gap-2">
-                  <a href="/Static-Blog/tags/摸鱼技巧/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                    #摸鱼技巧
-                  </a>
-                  <a href="/Static-Blog/tags/电子摆烂/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                    #电子摆烂
-                  </a>
-                  <a href="/Static-Blog/tags/程序摸鱼/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                    #程序摸鱼
-                  </a>
-              </div>
-            </div>
-          </article>
-          <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-2">
-            <!-- 文章内容（保持不变） -->
+            <!-- 文章内容 -->
             <div class="h-48 overflow-hidden">
               <img src="/Static-Blog/styles/images/Cloud.jpg" alt="【终极发疯指南】当概率论教授开始玩《羊了个羊》" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
             </div>
             <div class="p-6">
               <div class="flex items-center text-sm text-gray-500 mb-3">
-                <i class="fa fa-calendar-o mr-2"></i>
+                <!-- 日历图标使用 primary 颜色，与 postlist 保持一致 -->
+                <i class="fa fa-calendar-o mr-2 text-primary"></i>
                 <span>2025年07月27日</span>
-                  <span class="ml-4"><i class="fa fa-pencil mr-1"></i> 20 分钟前</span>
+                  <!-- 刷新图标使用 secondary 颜色，与 postlist 保持一致 -->
+                  <span class="ml-4"><i class="fa fa-refresh mr-1 text-secondary"></i> 更新于 18 天前</span>
               </div>
               <h2 class="text-xl font-bold mb-3">
                 <a href="/Static-Blog/posts/article (1)/" class="text-dark hover:text-primary transition-colors group-hover:underline">
@@ -551,8 +520,43 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
             </div>
           </article>
+          <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-2">
+            <!-- 文章内容 -->
+            <div class="h-48 overflow-hidden">
+              <img src="/Static-Blog/styles/images/Cloud.jpg" alt="【电子错乱】AI 的摸鱼行为分析报告" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center text-sm text-gray-500 mb-3">
+                <!-- 日历图标使用 primary 颜色，与 postlist 保持一致 -->
+                <i class="fa fa-calendar-o mr-2 text-primary"></i>
+                <span>2025年07月27日</span>
+                  <!-- 刷新图标使用 secondary 颜色，与 postlist 保持一致 -->
+                  <span class="ml-4"><i class="fa fa-refresh mr-1 text-secondary"></i> 更新于 19 天前</span>
+              </div>
+              <h2 class="text-xl font-bold mb-3">
+                <a href="/Static-Blog/posts/article (12)/" class="text-dark hover:text-primary transition-colors group-hover:underline">
+                  【电子错乱】AI 的摸鱼行为分析报告
+                </a>
+              </h2>
+              <p class="text-gray-600 mb-4 line-clamp-3">
+                
+              </p>
+              <div class="flex flex-wrap gap-2">
+                  <a href="/Static-Blog/tags/摸鱼技巧/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                    #摸鱼技巧
+                  </a>
+                  <a href="/Static-Blog/tags/电子摆烂/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                    #电子摆烂
+                  </a>
+                  <a href="/Static-Blog/tags/程序摸鱼/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                    #程序摸鱼
+                  </a>
+              </div>
+            </div>
+          </article>
       </div>
     </section>
+    
 
   <!-- 最新文章区 -->
 <section class="latest-posts opacity-0" id="latest-section">
@@ -566,65 +570,75 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
   
   <!-- 传递 maxPosts 参数限制显示数量 -->
-<!-- post_list.njk -->
 <div class="space-y-6">
-      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group">
+      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group relative">
+        
+        
         <div class="flex flex-col md:flex-row gap-6">
           <div class="md:w-1/3">
             <div class="rounded-lg overflow-hidden h-40 md:h-full">
               <img 
                 src="/Static-Blog/styles/images/Cloud.jpg" 
-                alt="【电子错乱】AI 的摸鱼行为分析报告" 
+                alt="【代码发疯】关于程序报错的精神攻击报告" 
                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
               >
             </div>
           </div>
           <div class="md:w-2/3">
-            <!-- 1. 标题 -->
+            <!-- 1. 发布时间 + 修改时间 -->
+            <div class="post-meta flex items-center text-sm mt-2 mb-3">
+                <div class="flex items-center mr-4">
+                    <i class="fa fa-calendar-o mr-1 text-primary"></i>
+                    <span class="text-gray-500 dark:text-gray-400">2025年07月28日</span>
+                </div>
+  <span class="text-gray-500 dark:text-gray-400">
+    <i class="fa fa-refresh mr-1 text-secondary"></i>
+    更新于 18天前
+  </span>
+            </div>
+            
+            <!-- 2. 标题 -->
             <h2 class="text-xl font-bold">
-                <a href="/Static-Blog/posts/article (12)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
-                    【电子错乱】AI 的摸鱼行为分析报告
+                <a href="/Static-Blog/posts/article (13)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
+                    【代码发疯】关于程序报错的精神攻击报告
                 </a>
             </h2>
-            
-            <!-- 2. 发布时间 + 修改时间 -->
-            <div class="post-meta flex items-center text-sm text-gray-500 mt-2 mb-3">
-                <div class="flex items-center mr-4">
-                    <i class="fa fa-calendar-o mr-1"></i>
-                    <span>2025年07月27日</span>
-                </div>
-                    <div class="flex items-center">
-                        <i class="fa fa-pencil mr-1"></i>
-                        <span>大约 18 小时前</span>
-                    </div>
-            </div>
             
             <!-- 3. 文章摘要 -->
             <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
                 
             </p>
             
-            <!-- 4. 标签 -->
-            <div class="post-tags flex flex-wrap gap-2">
-                    <a href="/Static-Blog/tags/摸鱼技巧/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #摸鱼技巧
-                    </a>
-                    <a href="/Static-Blog/tags/电子摆烂/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #电子摆烂
-                    </a>
-                    <a href="/Static-Blog/tags/程序摸鱼/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #程序摸鱼
-                    </a>
+            <!-- 4. 标签和阅读更多 -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="post-tags flex flex-wrap gap-2">
+                        <a href="/Static-Blog/tags/代码报错/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #代码报错
+                        </a>
+                        <a href="/Static-Blog/tags/程序崩溃/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #程序崩溃
+                        </a>
+                        <a href="/Static-Blog/tags/程序员崩溃/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #程序员崩溃
+                        </a>
+                </div>
+                
+                <!-- 5. 阅读更多 -->
+                <a href="/Static-Blog/posts/article (13)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
+                    阅读更多 <i class="fa fa-angle-right ml-1"></i>
+                </a>
             </div>
-            
-            <!-- 5. 阅读更多 -->
-            <a href="/Static-Blog/posts/article (12)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
-                阅读更多 <i class="fa fa-angle-right ml-1"></i>
-            </a>
           </div>
         </div>
       </article>
-      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group">
+      
+      <!-- 分隔线 -->
+      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group relative">
+        
+          <div class="absolute top-4 right-4 z-10 bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+            <i class="fa fa-star"></i> 精选
+          </div>
+        
         <div class="flex flex-col md:flex-row gap-6">
           <div class="md:w-1/3">
             <div class="rounded-lg overflow-hidden h-40 md:h-full">
@@ -636,51 +650,135 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
           </div>
           <div class="md:w-2/3">
-            <!-- 1. 标题 -->
+            <!-- 1. 发布时间 + 修改时间 -->
+            <div class="post-meta flex items-center text-sm mt-2 mb-3">
+                <div class="flex items-center mr-4">
+                    <i class="fa fa-calendar-o mr-1 text-primary"></i>
+                    <span class="text-gray-500 dark:text-gray-400">2025年07月27日</span>
+                </div>
+  <span class="text-gray-500 dark:text-gray-400">
+    <i class="fa fa-refresh mr-1 text-secondary"></i>
+    更新于 18天前
+  </span>
+            </div>
+            
+            <!-- 2. 标题 -->
             <h2 class="text-xl font-bold">
                 <a href="/Static-Blog/posts/article (1)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
                     【终极发疯指南】当概率论教授开始玩《羊了个羊》
                 </a>
             </h2>
             
-            <!-- 2. 发布时间 + 修改时间 -->
-            <div class="post-meta flex items-center text-sm text-gray-500 mt-2 mb-3">
-                <div class="flex items-center mr-4">
-                    <i class="fa fa-calendar-o mr-1"></i>
-                    <span>2025年07月27日</span>
+            <!-- 3. 文章摘要 -->
+            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
+                
+            </p>
+            
+            <!-- 4. 标签和阅读更多 -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="post-tags flex flex-wrap gap-2">
+                        <a href="/Static-Blog/tags/赛博精神病/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #赛博精神病
+                        </a>
+                        <a href="/Static-Blog/tags/概率暴走/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #概率暴走
+                        </a>
+                        <a href="/Static-Blog/tags/游戏黑洞/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #游戏黑洞
+                        </a>
                 </div>
-                    <div class="flex items-center">
-                        <i class="fa fa-pencil mr-1"></i>
-                        <span>20 分钟前</span>
-                    </div>
+                
+                <!-- 5. 阅读更多 -->
+                <a href="/Static-Blog/posts/article (1)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
+                    阅读更多 <i class="fa fa-angle-right ml-1"></i>
+                </a>
             </div>
+          </div>
+        </div>
+      </article>
+      
+      <!-- 分隔线 -->
+      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group relative">
+        
+          <div class="absolute top-4 right-4 z-10 bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+            <i class="fa fa-star"></i> 精选
+          </div>
+        
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="md:w-1/3">
+            <div class="rounded-lg overflow-hidden h-40 md:h-full">
+              <img 
+                src="/Static-Blog/styles/images/Cloud.jpg" 
+                alt="【电子错乱】AI 的摸鱼行为分析报告" 
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              >
+            </div>
+          </div>
+          <div class="md:w-2/3">
+            <!-- 1. 发布时间 + 修改时间 -->
+            <div class="post-meta flex items-center text-sm mt-2 mb-3">
+                <div class="flex items-center mr-4">
+                    <i class="fa fa-calendar-o mr-1 text-primary"></i>
+                    <span class="text-gray-500 dark:text-gray-400">2025年07月27日</span>
+                </div>
+  <span class="text-gray-500 dark:text-gray-400">
+    <i class="fa fa-refresh mr-1 text-secondary"></i>
+    更新于 19天前
+  </span>
+            </div>
+            
+            <!-- 2. 标题 -->
+            <h2 class="text-xl font-bold">
+                <a href="/Static-Blog/posts/article (12)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
+                    【电子错乱】AI 的摸鱼行为分析报告
+                </a>
+            </h2>
             
             <!-- 3. 文章摘要 -->
             <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
                 
             </p>
             
-            <!-- 4. 标签 -->
-            <div class="post-tags flex flex-wrap gap-2">
-                    <a href="/Static-Blog/tags/赛博精神病/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #赛博精神病
-                    </a>
-                    <a href="/Static-Blog/tags/概率暴走/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #概率暴走
-                    </a>
-                    <a href="/Static-Blog/tags/游戏黑洞/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #游戏黑洞
-                    </a>
+            <!-- 4. 标签和阅读更多 -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="post-tags flex flex-wrap gap-2">
+                        <a href="/Static-Blog/tags/摸鱼技巧/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #摸鱼技巧
+                        </a>
+                        <a href="/Static-Blog/tags/电子摆烂/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #电子摆烂
+                        </a>
+                        <a href="/Static-Blog/tags/程序摸鱼/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #程序摸鱼
+                        </a>
+                </div>
+                
+                <!-- 5. 阅读更多 -->
+                <a href="/Static-Blog/posts/article (12)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
+                    阅读更多 <i class="fa fa-angle-right ml-1"></i>
+                </a>
             </div>
-            
-            <!-- 5. 阅读更多 -->
-            <a href="/Static-Blog/posts/article (1)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
-                阅读更多 <i class="fa fa-angle-right ml-1"></i>
-            </a>
           </div>
         </div>
       </article>
-      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group">
+      
+      <!-- 分隔线 -->
+          <div class="relative my-6">
+              <div class="absolute inset-0 flex items-center">
+                  <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+              </div>
+              <div class="relative flex justify-center text-xs uppercase">
+                  <span class="bg-white dark:bg-gray-900 px-4 py-1 text-gray-500">
+                      <i class="fa fa-star text-accent mr-1"></i> 继续探索 <i class="fa fa-star text-accent ml-1"></i>
+                  </span>
+              </div>
+          </div>
+      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group relative">
+        
+          <div class="absolute top-4 right-4 z-10 bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+            <i class="fa fa-star"></i> 精选
+          </div>
+        
         <div class="flex flex-col md:flex-row gap-6">
           <div class="md:w-1/3">
             <div class="rounded-lg overflow-hidden h-40 md:h-full">
@@ -692,157 +790,115 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
           </div>
           <div class="md:w-2/3">
-            <!-- 1. 标题 -->
+            <!-- 1. 发布时间 + 修改时间 -->
+            <div class="post-meta flex items-center text-sm mt-2 mb-3">
+                <div class="flex items-center mr-4">
+                    <i class="fa fa-calendar-o mr-1 text-primary"></i>
+                    <span class="text-gray-500 dark:text-gray-400">2025年07月21日</span>
+                </div>
+  <span class="text-gray-500 dark:text-gray-400">
+    <i class="fa fa-refresh mr-1 text-secondary"></i>
+    更新于 22天前
+  </span>
+            </div>
+            
+            <!-- 2. 标题 -->
             <h2 class="text-xl font-bold">
                 <a href="/Static-Blog/posts/article (7)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
                     非洲人的抽卡概率证明
                 </a>
             </h2>
             
-            <!-- 2. 发布时间 + 修改时间 -->
-            <div class="post-meta flex items-center text-sm text-gray-500 mt-2 mb-3">
-                <div class="flex items-center mr-4">
-                    <i class="fa fa-calendar-o mr-1"></i>
-                    <span>2025年07月21日</span>
-                </div>
-                    <div class="flex items-center">
-                        <i class="fa fa-pencil mr-1"></i>
-                        <span>大约 18 小时前</span>
-                    </div>
-            </div>
-            
             <!-- 3. 文章摘要 -->
             <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
                 
             </p>
             
-            <!-- 4. 标签 -->
-            <div class="post-tags flex flex-wrap gap-2">
-                    <a href="/Static-Blog/tags/游戏/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #游戏
-                    </a>
-                    <a href="/Static-Blog/tags/概率/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #概率
-                    </a>
+            <!-- 4. 标签和阅读更多 -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="post-tags flex flex-wrap gap-2">
+                        <a href="/Static-Blog/tags/游戏/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #游戏
+                        </a>
+                        <a href="/Static-Blog/tags/概率/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #概率
+                        </a>
+                </div>
+                
+                <!-- 5. 阅读更多 -->
+                <a href="/Static-Blog/posts/article (7)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
+                    阅读更多 <i class="fa fa-angle-right ml-1"></i>
+                </a>
             </div>
-            
-            <!-- 5. 阅读更多 -->
-            <a href="/Static-Blog/posts/article (7)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
-                阅读更多 <i class="fa fa-angle-right ml-1"></i>
-            </a>
           </div>
         </div>
       </article>
-      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group">
+      
+      <!-- 分隔线 -->
+      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group relative">
+        
+        
         <div class="flex flex-col md:flex-row gap-6">
           <div class="md:w-1/3">
             <div class="rounded-lg overflow-hidden h-40 md:h-full">
               <img 
                 src="/Static-Blog/styles/images/Cloud.jpg" 
-                alt="恋爱概率学：女神微笑的贝叶斯分析" 
+                alt="机器学习中的数学公式测试" 
                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
               >
             </div>
           </div>
           <div class="md:w-2/3">
-            <!-- 1. 标题 -->
+            <!-- 1. 发布时间 + 修改时间 -->
+            <div class="post-meta flex items-center text-sm mt-2 mb-3">
+                <div class="flex items-center mr-4">
+                    <i class="fa fa-calendar-o mr-1 text-primary"></i>
+                    <span class="text-gray-500 dark:text-gray-400">2025年03月13日</span>
+                </div>
+  <span class="text-gray-500 dark:text-gray-400">
+    <i class="fa fa-refresh mr-1 text-secondary"></i>
+    更新于 24天前
+  </span>
+            </div>
+            
+            <!-- 2. 标题 -->
             <h2 class="text-xl font-bold">
-                <a href="/Static-Blog/posts/article (4)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
-                    恋爱概率学：女神微笑的贝叶斯分析
+                <a href="/Static-Blog/posts/article (5)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
+                    机器学习中的数学公式测试
                 </a>
             </h2>
-            
-            <!-- 2. 发布时间 + 修改时间 -->
-            <div class="post-meta flex items-center text-sm text-gray-500 mt-2 mb-3">
-                <div class="flex items-center mr-4">
-                    <i class="fa fa-calendar-o mr-1"></i>
-                    <span>2025年07月21日</span>
-                </div>
-                    <div class="flex items-center">
-                        <i class="fa fa-pencil mr-1"></i>
-                        <span>大约 18 小时前</span>
-                    </div>
-            </div>
             
             <!-- 3. 文章摘要 -->
             <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
                 
             </p>
             
-            <!-- 4. 标签 -->
-            <div class="post-tags flex flex-wrap gap-2">
-                    <a href="/Static-Blog/tags/概率/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #概率
-                    </a>
-                    <a href="/Static-Blog/tags/生活/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #生活
-                    </a>
-            </div>
-            
-            <!-- 5. 阅读更多 -->
-            <a href="/Static-Blog/posts/article (4)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
-                阅读更多 <i class="fa fa-angle-right ml-1"></i>
-            </a>
-          </div>
-        </div>
-      </article>
-      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group">
-        <div class="flex flex-col md:flex-row gap-6">
-          <div class="md:w-1/3">
-            <div class="rounded-lg overflow-hidden h-40 md:h-full">
-              <img 
-                src="/Static-Blog/styles/images/Cloud.jpg" 
-                alt="【拖延晚期】关于最后一刻才行动的报告" 
-                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-              >
-            </div>
-          </div>
-          <div class="md:w-2/3">
-            <!-- 1. 标题 -->
-            <h2 class="text-xl font-bold">
-                <a href="/Static-Blog/posts/article (20)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
-                    【拖延晚期】关于最后一刻才行动的报告
-                </a>
-            </h2>
-            
-            <!-- 2. 发布时间 + 修改时间 -->
-            <div class="post-meta flex items-center text-sm text-gray-500 mt-2 mb-3">
-                <div class="flex items-center mr-4">
-                    <i class="fa fa-calendar-o mr-1"></i>
-                    <span>2025年03月04日</span>
+            <!-- 4. 标签和阅读更多 -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="post-tags flex flex-wrap gap-2">
+                        <a href="/Static-Blog/tags/机器学习/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #机器学习
+                        </a>
+                        <a href="/Static-Blog/tags/数学/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #数学
+                        </a>
+                        <a href="/Static-Blog/tags/公式测试/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #公式测试
+                        </a>
                 </div>
-                    <div class="flex items-center">
-                        <i class="fa fa-pencil mr-1"></i>
-                        <span>大约 18 小时前</span>
-                    </div>
-            </div>
-            
-            <!-- 3. 文章摘要 -->
-            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
                 
-            </p>
-            
-            <!-- 4. 标签 -->
-            <div class="post-tags flex flex-wrap gap-2">
-                    <a href="/Static-Blog/tags/拖延症/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #拖延症
-                    </a>
-                    <a href="/Static-Blog/tags/最后冲刺/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #最后冲刺
-                    </a>
-                    <a href="/Static-Blog/tags/火烧眉毛/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
-                        #火烧眉毛
-                    </a>
+                <!-- 5. 阅读更多 -->
+                <a href="/Static-Blog/posts/article (5)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
+                    阅读更多 <i class="fa fa-angle-right ml-1"></i>
+                </a>
             </div>
-            
-            <!-- 5. 阅读更多 -->
-            <a href="/Static-Blog/posts/article (20)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
-                阅读更多 <i class="fa fa-angle-right ml-1"></i>
-            </a>
           </div>
         </div>
       </article>
-</div></section>
+      
+      <!-- 分隔线 -->
+</div>
+    </section>
 
    <script>
   // 文字拆分动画 - 优化版

@@ -385,65 +385,81 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
     </div>
 
-    <!-- 全部文章区域（仅保留此区域） -->
+    <!-- 全部文章区域 - 使用通用文章列表组件 -->
     <div class="content-container">
-        <section class="post-list space-y-8">
-                <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 group relative">
-                    
-                    
-                    <!-- 左侧色条装饰 -->
-                    <div class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    <div class="p-6 md:p-7 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/4">
-                            <div class="rounded-lg overflow-hidden h-40 md:h-56">
-                                <img src="/Static-Blog/styles/images/Cloud.jpg" 
-                                     alt="【猫片沉迷】关于吸猫无法自拔的报告" 
-                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                            </div>
-                        </div>
-                        
-                        <div class="md:w-3/4">
-                            <div class="flex items-center text-sm text-gray-500 mb-3">
-                                <i class="fa fa-calendar-o mr-2 text-primary/70"></i>
-                                <span>2025年06月30日</span>
-                            </div>
-                            
-                            <h2 class="text-xl font-bold mb-3">
-                                <a href="/Static-Blog/posts/article (15)/" 
-                                   class="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors group-hover:underline">
-                                    【猫片沉迷】关于吸猫无法自拔的报告
-                                </a>
-                            </h2>
-                            
-                            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                                
-                            </p>
-                            
-                            <div class="flex items-center justify-between">
-                                <div class="post-tags flex gap-1 text-sm">
-                                        <span class="text-primary/70">#吸猫成瘾</span>
-                                        <span class="text-primary/70">#猫片狂热</span>
-                                </div>
-                                
-                                <a href="/Static-Blog/posts/article (15)/" 
-                                   class="text-primary dark:text-primary hover:text-secondary dark:hover:text-secondary flex items-center gap-1">
-                                    阅读全文 <i class="fa fa-angle-right ml-1 transition-transform group-hover:translate-x-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+        <div class="post-list space-y-8">
+<div class="space-y-6">
+      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group relative">
+        
+        
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="md:w-1/3">
+            <div class="rounded-lg overflow-hidden h-40 md:h-full">
+              <img 
+                src="/Static-Blog/styles/images/Cloud.jpg" 
+                alt="【猫片沉迷】关于吸猫无法自拔的报告" 
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              >
+            </div>
+          </div>
+          <div class="md:w-2/3">
+            <!-- 1. 发布时间 + 修改时间 -->
+            <div class="post-meta flex items-center text-sm mt-2 mb-3">
+                <div class="flex items-center mr-4">
+                    <i class="fa fa-calendar-o mr-1 text-primary"></i>
+                    <span class="text-gray-500 dark:text-gray-400">2025年06月30日</span>
+                </div>
+  <span class="text-gray-500 dark:text-gray-400">
+    <i class="fa fa-refresh mr-1 text-secondary"></i>
+    更新于 26天前
+  </span>
+            </div>
+            
+            <!-- 2. 标题 -->
+            <h2 class="text-xl font-bold">
+                <a href="/Static-Blog/posts/article (15)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
+                    【猫片沉迷】关于吸猫无法自拔的报告
+                </a>
+            </h2>
+            
+            <!-- 3. 文章摘要 -->
+            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
                 
-                <!-- 装饰性分隔线 -->
-        </section>
+            </p>
+            
+            <!-- 4. 标签和阅读更多 -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="post-tags flex flex-wrap gap-2">
+                        <a href="/Static-Blog/tags/吸猫成瘾/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #吸猫成瘾
+                        </a>
+                        <a href="/Static-Blog/tags/猫片狂热/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #猫片狂热
+                        </a>
+                        <a href="/Static-Blog/tags/云养猫/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #云养猫
+                        </a>
+                </div>
+                
+                <!-- 5. 阅读更多 -->
+                <a href="/Static-Blog/posts/article (15)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
+                    阅读更多 <i class="fa fa-angle-right ml-1"></i>
+                </a>
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <!-- 分隔线 -->
+</div>
+            </div>
     </div>
 
     <!-- 分页导航 -->
     
     <!-- 装饰性元素 -->
-    <div class="fixed -bottom-20 -right-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl pointer-events-none"></div>
-    <div class="fixed -top-20 -left-20 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="fixed -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="fixed -top-20 -right-20 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl pointer-events-none"></div>
     </main>
 
     <!-- 引入独立页脚 -->
