@@ -34,87 +34,61 @@
         </div>
     </div>
 
-    <!-- 全部文章区域（仅保留此区域） -->
+    <!-- 全部文章区域 - 使用通用文章列表组件 -->
     <div class="content-container">
-        <section class="post-list space-y-8">
-            {% for post in posts %}
-                <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 group relative">
-                    {# 精选标识（保留标识） #}
-                    {% if post.featured %}
-                        <div class="absolute top-4 right-4 z-10 bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
-                            <i class="fa fa-star"></i> 精选
-                        </div>
-                    {% endif %}
-                    
-                    <!-- 左侧色条装饰 -->
-                    <div class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    <div class="p-6 md:p-7 flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/4">
-                            <div class="rounded-lg overflow-hidden h-40 md:h-56">
-                                <img src="{{ (config.baseUrl + post.cover) or (config.defaultCoverImage) }}" 
-                                     alt="{{ post.title }}" 
-                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                            </div>
-                        </div>
-                        
-                        <div class="md:w-3/4">
-                            <div class="flex items-center text-sm text-gray-500 mb-3">
-                                <i class="fa fa-calendar-o mr-2 text-primary/70"></i>
-                                <span>{{ post.date | date('yyyy年MM月dd日') }}</span>
-                            </div>
-                            
-                            <h2 class="text-xl font-bold mb-3">
-                                <a href="{{ config.baseUrl }}/posts/{{ post.slug }}/" 
-                                   class="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors group-hover:underline">
-                                    {{ post.title }}
-                                </a>
-                            </h2>
-                            
-                            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                                {{ post.excerpt | safe | striptags | truncate(180) }}
-                            </p>
-                            
-                            <div class="flex items-center justify-between">
-                                <div class="post-tags flex gap-1 text-sm">
-                                    {% for t in post.tags.slice(0, 2) %}
-                                        <span class="text-primary/70">#{{ t }}</span>
-                                    {% endfor %}
-                                </div>
-                                
-                                <a href="{{ config.baseUrl }}/posts/{{ post.slug }}/" 
-                                   class="text-primary dark:text-primary hover:text-secondary dark:hover:text-secondary flex items-center gap-1">
-                                    阅读全文 <i class="fa fa-angle-right ml-1 transition-transform group-hover:translate-x-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <!-- 装饰性分隔线 -->
-                {% if not loop.last %}
-                    <div class="h-1 bg-gradient-to-r from-transparent via-primary/10 to-transparent my-8"></div>
-                {% endif %}
-            {% endfor %}
-        </section>
+        <div class="post-list space-y-8">
+            {% include "post_list.njk" %}
+        </div>
     </div>
 
     <!-- 分页导航 -->
     {% if totalPages > 1 %}
-        <div class="mt-12 text-center">
+        <div class="mt-12">
             {% set baseUrl = config.baseUrl + '/tags/' + (tag | urlencode) + '/page/' %}
             {% include "pagination.njk" %}
         </div>
     {% endif %}
     
     <!-- 装饰性元素 -->
-    <div class="fixed -bottom-20 -right-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl pointer-events-none"></div>
-    <div class="fixed -top-20 -left-20 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="fixed -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="fixed -top-20 -right-20 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl pointer-events-none"></div>
 {% endblock %}
 
 {% block extraStyle %}
     <style>
-        /* 标签页专属样式，移除筛选按钮相关样式 */
+        /* 与普通页面完全一致的样式 */
+        .post-list article:hover {
+            transform: translateY(-3px);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--primary-dark), var(--secondary-dark));
+        }
+        
+        /* 主题色变量 - 与普通页面一致 */
+        :root {
+            --primary: {{ config.theme.primary or '#3B82F6' }};
+            --primary-dark: {{ config.theme.primaryDark or '#2563EB' }};
+            --secondary: {{ config.theme.secondary or '#F97316' }};
+            --secondary-dark: {{ config.theme.secondaryDark or '#EA580C' }};
+            --accent: {{ config.theme.accent or '#EC4899' }};
+            --accent-dark: {{ config.theme.accentDark or '#db2777' }};
+        }
+        
+        /* 文章卡片动画 - 与普通页面一致 */
         .post-list article {
             animation: fadeInUp 0.3s ease forwards;
             opacity: 0;
@@ -136,16 +110,12 @@
             }
         }
         
-        /* 精选文章标识样式 */
-        .post-list article:hover .bg-accent {
-            background: var(--accent-dark, #db2777);
-        }
-        
-        /* 分页样式增强 */
+        /* 分页样式 - 与普通页面一致 */
         .pagination {
             display: flex;
             justify-content: center;
             gap: 4px;
+            margin-top: 2rem;
         }
         
         .pagination a,
@@ -173,39 +143,22 @@
             background: var(--primary);
             color: white;
         }
-        
-        /* 图片效果 */
-        .post-list img {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-        }
-
-        /* 主题色变量 */
-        :root {
-            --primary: {{ config.theme.primary or '#3B82F6' }};
-            --primary-dark: {{ config.theme.primaryDark or '#2563EB' }};
-            --secondary: {{ config.theme.secondary or '#F97316' }};
-            --secondary-dark: {{ config.theme.secondaryDark or '#EA580C' }};
-            --accent: {{ config.theme.accent or '#EC4899' }};
-            --accent-dark: {{ config.theme.accentDark or '#db2777' }};
-        }
     </style>
 {% endblock %}
 
 {% block extraScript %}
-    <!-- 移除筛选相关脚本，保留必要动画 -->
+    <!-- 与普通页面一致的动画脚本 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 文章卡片渐入动画
+            // 文章卡片动画
             const articles = document.querySelectorAll('.post-list article');
             articles.forEach((article, index) => {
-                article.style.animationDelay = `${index * 0.1}s`;
+                setTimeout(() => {
+                    article.style.opacity = '1';
+                    article.style.transform = 'translateY(0)';
+                }, 100 * index);
             });
         });
     </script>
 {% endblock %}
+    

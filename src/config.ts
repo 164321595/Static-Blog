@@ -16,8 +16,8 @@ export const config = {
   postsPerPage: 5,
   enableSearch: true,
   paginationRange: 3,
-  baseUrl: "", // 添加统一前缀
-  defaultCoverImage: "https://picsum.photos/600/400?random=default",
+  baseUrl: "/Static-Blog", // 添加统一前缀/Static-Blog
+  defaultCoverImage: "/styles/images/Cloud.jpg", // 默认封面图片路径
 
   // 新增：文章数量配置
   postCounts: {

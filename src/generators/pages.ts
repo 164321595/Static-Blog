@@ -7,26 +7,36 @@ import { config } from "../config";
 import { BlogStats } from "./stats";
 
 export async function generatePages(posts: Post[], stats: BlogStats) {
-  // 对文章进行排序：精选文章在前，按时间降序排列
-  const sortedPosts = posts.sort((a, b) => {
-    // 精选文章优先
+  // 1. 为首页创建按更新日期排序的文章列表（不考虑精选）
+  const homePosts = [...posts].sort((a, b) => {
+    // 优先使用更新日期，没有则使用发布日期
+    const dateA = a.updated ? new Date(a.updated) : new Date(a.date);
+    const dateB = b.updated ? new Date(b.updated) : new Date(b.date);
+    return dateB.getTime() - dateA.getTime(); // 最新的在前
+  });
+
+  // 2. 为列表页创建排序：精选文章在前，且统一按更新日期排序（核心修改）
+  const listPagePosts = [...posts].sort((a, b) => {
+    // 第一步：精选文章优先
     if (a.featured && !b.featured) return -1;
     if (!a.featured && b.featured) return 1;
 
-    // 精选级别相同则按时间降序
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
+    // 第二步：精选状态相同则按「更新日期优先」排序（修复非精选文章排序问题）
+    const dateA = a.updated ? new Date(a.updated) : new Date(a.date);
+    const dateB = b.updated ? new Date(b.updated) : new Date(b.date);
+    return dateB.getTime() - dateA.getTime(); // 最新的在前
   });
 
-  const totalPages = Math.ceil(sortedPosts.length / config.postsPerPage);
+  const totalPages = Math.ceil(listPagePosts.length / config.postsPerPage);
 
   console.log(`生成 ${totalPages} 个文章列表页`);
 
-  // 1. 生成独立主页（根目录）
+  // 生成独立主页
   const homeDir = config.distDir;
   await ensureDir(homeDir);
 
   const homeHtml = await compileTemplate("home", {
-    posts: sortedPosts,
+    posts: homePosts,
     currentPage: 0,
     totalPages,
     config,
@@ -38,12 +48,12 @@ export async function generatePages(posts: Post[], stats: BlogStats) {
   await writeFile(homePath, homeHtml);
   console.log(`已生成独立主页: ${homePath}`);
 
-  // 2. 生成文章列表页（从/page/1/开始）
+  // 生成文章列表页
   for (let i = 0; i < totalPages; i++) {
     const currentPage = i + 1;
     const start = i * config.postsPerPage;
     const end = start + config.postsPerPage;
-    const pagePosts = sortedPosts.slice(start, end);
+    const pagePosts = listPagePosts.slice(start, end);
 
     const pageDir = join(config.distDir, "page", `${currentPage}`);
     await ensureDir(pageDir);

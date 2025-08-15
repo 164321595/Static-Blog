@@ -4,7 +4,7 @@ import { join } from "path";
 import { config } from "../config";
 import { format } from "date-fns";
 import zhCN from "date-fns/locale/zh-CN";
-
+import { formatRelativeDate } from "./time";
 const env = nunjucks.configure(join(__dirname, "../templates"), {
   autoescape: false,
   trimBlocks: true,
@@ -78,3 +78,7 @@ export async function compileTemplate(
     );
   });
 }
+
+env.addFilter("relativeDate", (date: string) => {
+  return formatRelativeDate(date);
+});

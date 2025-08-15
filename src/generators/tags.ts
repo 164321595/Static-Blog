@@ -5,10 +5,9 @@ import { join } from "path";
 import { compileTemplate } from "../utils/template";
 import { Post } from "./posts";
 import { config } from "../config";
-import { BlogStats } from "./stats"; // 新增
+import { BlogStats } from "./stats";
 
 export async function generateTags(posts: Post[], stats: BlogStats) {
-  // 新增stats参数
   const tagsMap: Record<string, Post[]> = {};
 
   // 收集所有标签
@@ -35,7 +34,7 @@ export async function generateTags(posts: Post[], stats: BlogStats) {
   await ensureDir(join(config.distDir, "tags"));
 
   for (const [tag, taggedPosts] of Object.entries(tagsMap)) {
-    // 对每个标签下的文章进行排序
+    // 对每个标签下的文章进行排序（使用统一逻辑）
     const sortedPosts = sortPosts(taggedPosts);
 
     const totalPages = Math.ceil(sortedPosts.length / config.postsPerPage);
@@ -54,7 +53,7 @@ export async function generateTags(posts: Post[], stats: BlogStats) {
         totalPages,
         config,
         isTag: true,
-        stats: stats, // 传递统计信息
+        stats: stats,
       });
 
       const outputDir = join(
@@ -92,23 +91,28 @@ export async function generateTags(posts: Post[], stats: BlogStats) {
     );
   }
 
-  // 生成标签索引页（传递stats）
+  // 生成标签索引页
   const html = await compileTemplate("tag-index", {
     tags,
     config,
-    stats: stats, // 传递统计信息
+    stats: stats,
   });
 
   await writeFile(join(config.distDir, "tags", "index.html"), html);
 }
 
-// 排序函数
+// 排序函数：精选优先，同级别按更新日期排序（无更新日期则用发布日期）
 function sortPosts(posts: Post[]): Post[] {
-  const featuredPosts = posts
-    .filter((post) => post.featured)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  const regularPosts = posts
-    .filter((post) => !post.featured)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  return [...featuredPosts, ...regularPosts];
+  return [...posts].sort((a, b) => {
+    // 第一步：精选文章优先
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+
+    // 第二步：精选状态相同则按「更新日期优先」排序
+    const dateA = a.updated ? new Date(a.updated) : new Date(a.date);
+    const dateB = b.updated ? new Date(b.updated) : new Date(b.date);
+
+    // 最新的在前（降序）
+    return dateB.getTime() - dateA.getTime();
+  });
 }
