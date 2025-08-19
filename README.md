@@ -128,49 +128,7 @@ static-blog-generator/
 
 2.  运行 `npm run build` 生成 `dist` 目录
 
-### 自动部署（推荐）
-
-
-1.  创建 `.github/workflows/deploy.yml` 文件，内容如下：
-
-
-```
-name: Deploy to GitHub Pages
-
-on:
-
-     push:
-
-       branches: \[ main ]
-
-jobs:
-
-     deploy:
-
-       runs-on: ubuntu-latest
-
-       steps:
-
-         \- uses: actions/checkout@v4
-
-         \- uses: actions/setup-node@v4
-
-           with: { node-version: 18 }
-
-         \- run: npm install && npm run build
-
-         \- uses: peaceiris/actions-gh-pages@v3
-
-           with:
-
-             github\_token: \${{ secrets.GITHUB\_TOKEN }}
-
-             publish\_dir: ./dist
-```
-
-1.  推送代码后，在仓库 **Settings → Pages** 中选择 `gh-pages` 分支作为源
-
-2.  访问地址：`https://（yourname）.github.io/Static-Blog`
+(本项目为非GithubPge的Jeklly单一个人博客页部署，为项目仓库的网页部署)
 
 ### 简单部署
 
