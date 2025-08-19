@@ -17,6 +17,7 @@ export const config = {
   enableSearch: true,
   paginationRange: 3,
   baseUrl: "/Static-Blog", // 添加统一前缀/Static-Blog
+  domain: "164321595.github.io", // 网站域名(部署在GitHubPages上时,如果你使用的为https://164321595.github.io/Static-Blog/，则此处为164321595.github.io)
   defaultCoverImage: "/styles/images/Cloud.jpg", // 默认封面图片路径
 
   // 新增：文章数量配置
