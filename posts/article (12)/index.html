@@ -579,34 +579,128 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="w-20 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
         </div>
         
-      <!-- 分享区域 -->
+     <!-- 分享区域 -->
 <div class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-800">
     <h3 class="text-lg font-medium mb-4 flex items-center gap-2 text-gray-700 dark:text-gray-300">
         <i class="fa fa-share-alt text-primary"></i>
         分享本文
     </h3>
     <div class="flex gap-3">
-        <!-- 组合 domain 和 baseUrl 形成完整URL -->
-        <a href="https://twitter.com/intent/tweet?url=164321595.github.io/Static-Blog/posts/article (12)/&text=【电子错乱】AI 的摸鱼行为分析报告" 
-           target="_blank" rel="noopener" 
-           class="w-10 h-10 rounded-full bg-[#1DA1F2]/10 text-[#1DA1F2] flex items-center justify-center hover:bg-[#1DA1F2]/20 transition-colors">
-            <i class="fa fa-twitter"></i>
-        </a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=164321595.github.io/Static-Blog/posts/article (12)/" 
-           target="_blank" rel="noopener" 
-           class="w-10 h-10 rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center hover:bg-[#1877F2]/20 transition-colors">
-            <i class="fa fa-facebook"></i>
-        </a>
-        <a href="javascript:window.open('https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=164321595.github.io/Static-Blog/posts/article (12)/&skey=&device=0&pass_ticket=&op=2', '_blank', 'width=600,height=400')" 
+        <!-- 微信分享 -->
+        <button id="wechatShareBtn" 
            class="w-10 h-10 rounded-full bg-[#07C160]/10 text-[#07C160] flex items-center justify-center hover:bg-[#07C160]/20 transition-colors">
             <i class="fa fa-weixin"></i>
-        </a>
-        <button onclick="navigator.clipboard.writeText('164321595.github.io/Static-Blog/posts/article (12)/').then(() => alert('链接已复制！'))" 
-                class="w-10 h-10 rounded-full bg-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+        </button>
+        
+        <!-- QQ分享 -->
+        <button id="qqShareBtn" 
+           class="w-10 h-10 rounded-full bg-[#12B7F5]/10 text-[#12B7F5] flex items-center justify-center hover:bg-[#12B7F5]/20 transition-colors">
+            <i class="fa fa-qq"></i>
+        </button>
+        
+        <!-- 复制链接 -->
+        <button id="copyLinkBtn" 
+                class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
             <i class="fa fa-link"></i>
         </button>
     </div>
+    
+    <!-- 二维码弹窗 -->
+    <div id="qrModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-sm w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="qrTitle" class="text-lg font-medium">分享到</h3>
+                <button id="closeQRBtn" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="text-center">
+                <p id="qrHint" class="mb-4">扫描二维码分享</p>
+                <canvas id="qrCanvas" width="200" height="200" class="mx-auto mb-4"></canvas>
+                <p class="text-sm text-gray-500">提示：打开APP，使用扫一扫功能</p>
+                <div class="mt-4">
+                    <button id="copyInQRBtn" class="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-md text-sm">
+                        <i class="fa fa-link mr-1"></i>复制链接
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- 使用更稳定的QRCode库 -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+<script>
+// 确保DOM完全加载
+document.addEventListener('DOMContentLoaded', function() {
+    // 初始化事件监听
+    document.getElementById('wechatShareBtn').addEventListener('click', () => showShareQR('wechat'));
+    document.getElementById('qqShareBtn').addEventListener('click', () => showShareQR('qq'));
+    document.getElementById('copyLinkBtn').addEventListener('click', copyCurrentUrl);
+    document.getElementById('closeQRBtn').addEventListener('click', hideQRCode);
+    document.getElementById('copyInQRBtn').addEventListener('click', copyCurrentUrl);
+    
+    // 预初始化画布
+    const canvas = document.getElementById('qrCanvas');
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+});
+
+// 复制当前URL
+function copyCurrentUrl() {
+    navigator.clipboard.writeText(window.location.href)
+        .then(() => alert('链接已复制！'))
+        .catch(err => console.error('复制失败:', err));
+    hideQRCode();
+}
+
+// 显示二维码
+function showShareQR(type) {
+    const modal = document.getElementById('qrModal');
+    const canvas = document.getElementById('qrCanvas');
+    const title = document.getElementById('qrTitle');
+    const hint = document.getElementById('qrHint');
+    
+    // 设置标题和提示
+    if(type === 'wechat') {
+        title.textContent = '分享到微信';
+        hint.textContent = '打开微信，点击右上角"+"使用扫一扫';
+    } else {
+        title.textContent = '分享到QQ';
+        hint.textContent = '打开QQ，点击右上角"+"使用扫一扫';
+    }
+    
+    try {
+        // 使用更可靠的QRCode库生成
+        QRCode.toCanvas(canvas, window.location.href, {
+            width: 180,
+            margin: 1,
+            color: {
+                dark: '#000000',
+                light: '#ffffff'
+            }
+        }, function(error) {
+            if (error) {
+                console.error('生成二维码失败:', error);
+                // 备用方案：显示文字链接
+                canvas.style.display = 'none';
+                hint.innerHTML = `分享链接：<br><small>${window.location.href}</small>`;
+            }
+        });
+        
+        modal.classList.remove('hidden');
+    } catch (e) {
+        console.error('二维码生成错误:', e);
+        // 完全失败时的备用方案
+        alert('生成二维码失败，请手动复制链接分享');
+        copyCurrentUrl();
+    }
+}
+
+// 隐藏二维码
+function hideQRCode() {
+    document.getElementById('qrModal').classList.add('hidden');
+}
+</script>
     </div>
     </main>
 
