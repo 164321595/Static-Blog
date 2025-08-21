@@ -136,7 +136,7 @@ static-blog-generator/
 
 2.  推送代码后，仓库 **Settings → Pages** 中选择 `main` 分支作为源
 
-3.  说明：本项目默认baseUrl为“” 为了适合GitHubPages的项目类网页，需要在src/config.ts中修改baseUrl为库名称。例如：Static-Blog库，则填写“/Static-Blog”。对于分享部分为适配其GitHubpage等静态网站而需添加前缀。需要在src/config.ts中修改domain为域名名称。domain: "164321595.github.io", // 网站域名(部署在GitHubPages上时,如果你使用的为https://164321595.github.io/Static-Blog/，则此处为164321595.github.io)
+3.  说明：本项目默认baseUrl为“” 为了适合GitHubPages的项目类网页，需要在src/config.ts中修改baseUrl为库名称。例如：Static-Blog库，则填写“/Static-Blog”。
 
 ## 贡献
 
