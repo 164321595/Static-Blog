@@ -156,58 +156,86 @@ static-blog-generator/
 
 **结果**：通过 CDN 导入简化了本地配置，避免了版本冲突，且开发效率显著提升。
 
-#### 三、search.json 与 stats.json 数据生成异常
+####  三、微信分享方案重构：从URL复制到统一二维码
 
-**1. search.json 信息缺失**
+## 重构背景
 
-- **问题**：生成的搜索索引文件缺少文章内容摘要，导致搜索结果不准确。
+原微信分享方案存在两个主要问题：
+1. **功能局限**：仅提供URL复制功能，用户需要手动粘贴到微信
+2. **体验割裂**：直接调用微信接口经常出现空白页或错误
 
-- **解决**：
+## 技术方案演进
 
-  - 在解析 Markdown 时，提取前 200 字作为摘要，并清理 HTML 标签：
-
-```
-const excerpt = md.render(rawContent).replace(/<\[^>]+>/g, '').substring(0, 200) + '...';
-```
-
-- 确保标签、作者等元数据正确解析，避免 `undefined` 字段：
-
-```
-const tags = Array.isArray(post.tags) ? post.tags : \[];
-
-const author = post.author || '匿名';
+### 1. 原始方案（URL复制）
+```javascript
+function copyWeChatShare() {
+navigator.clipboard.writeText(location.href);
+alert('链接已复制，请粘贴到微信');
+}
 ```
 
-**2. stats.json 统计逻辑错误**
-
-- **问题**：统计标签总数时重复计算同一标签在不同文章中的出现次数。
-
-- **解决**：使用 Set 数据结构去重，确保每个标签仅计数一次：
-
-```
-const allTags = new Set();
-
-posts.forEach(post => post.tags.forEach(tag => allTags.add(tag)));
-
-const totalTags = allTags.size;
-```
-
-- **新增统计项**：增加 “最长文章字数” 和 “平均阅读时长” 统计：
-
-```
-const longestPost = posts.reduce((a, b) =>&#x20;
-
-&#x20; a.content.length > b.content.length ? a : b
-
-);
-
-const averageReadingTime = Math.round(posts.reduce((sum, post) =>&#x20;
-
-&#x20; sum + post.content.split(' ').length / 300, 0) / posts.length
-
-);
+### 2. 过渡方案（微信JS-SDK尝试）
+```javascript
+function tryWeChatSDK() {
+if (typeof WeixinJSBridge !== 'undefined') {
+WeixinJSBridge.invoke('shareTimeline', {
+title: document.title,
+link: location.href
+});
+} else {
+copyWeChatShare(); // 降级到复制
+}
+}
 ```
 
+### 3. 最终方案（统一二维码）
+```javascript
+// 核心二维码生成
+function generateWeChatQR() {
+QRCode.toCanvas(document.getElementById('qrcode'), location.href, {
+width: 200,
+color: { dark: '#000', light: 'transparent' }
+});
+}
+
+// 集成调用
+function weChatShare() {
+showModal('微信分享');
+generateWeChatQR();
+}
+```
+
+## 关键改进点
+
+1. **统一入口**：
+- 所有终端统一使用二维码界面
+- 保留复制链接作为备用选项
+
+2. **视觉优化**：
+```css
+.qrcode-modal {
+backdrop-filter: blur(5px);
+background: rgba(0,0,0,0.7);
+}
+.qrcode-container {
+border-radius: 12px;
+padding: 2rem;
+}
+```
+
+3. **智能降级策略**：
+```javascript
+function safeGenerateQR() {
+try {
+generateWeChatQR();
+} catch (e) {
+document.getElementById('qrcode').innerHTML = `
+<p>${location.href}</p>
+<button onclick="copyWeChatShare()">复制链接</button>
+`;
+}
+}
+```
 #### 四、项目基础框架构建的认知挑战
 
 **问题描述**：
