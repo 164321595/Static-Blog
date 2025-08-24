@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酱姆(≧∇≦)ﾉ</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 MathJax 脚本 -->
+    <script src="/Static-Blog/styles/mathjax-full/es5/tex-mml-chtml.js"></script>
+    <!-- 引入 Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 配置 Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#34d399', // 活力的绿色
+                    secondary: '#fbbf24', // 黄色
+                    accent: '#ec4899', // 粉色
+                    dark: '#1e293b',
+                    light: '#f8fafc'
+                },
+                fontFamily: {
+                    sans: ['Inter', 'system-ui', 'sans-serif'],
+                    mono: ['Fira Code', 'monospace']
+                }
+            }
+        }
+    }
+</script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .transition-custom {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light text-dark antialiased">
+    <!-- 引入独立页眉 -->
+<header class="bg-gradient-to-r from-primary to-secondary text-white sticky top-0 z-50 shadow-lg transition-all duration-300 relative overflow-visible">
+  <!-- 粒子容器 -->
+  <div class="header-particles absolute inset-0 z-0"></div>
+  
+  <div class="container mx-auto px-4 py-3 max-w-6xl relative z-10">
+    <!-- 导航栏容器：移动端换行，桌面端不换行 -->
+    <div class="flex items-center justify-between w-full flex-wrap md:flex-nowrap gap-2">
+      <!-- Logo区域（第一行左侧 - 移动端和桌面端一致） -->
+      <div class="flex items-center gap-3 flex-shrink-0 order-1 md:order-1">
+        <div class="w-10 h-10 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300" 
+             style="box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3);">
+          <canvas id="logo-canvas" width="128" height="128" 
+                  style="width: 40px; height: 40px; display: block;"></canvas>
+        </div>
+        <a href="/Static-Blog/" class="text-xl font-bold tracking-tight whitespace-nowrap">
+          酱姆(≧∇≦)ﾉ
+        </a>
+      </div>
+      
+      <!-- 搜索框：移动端第二行，桌面端中间 -->
+      <div class="search-container 
+                  w-full max-w-[90%] mx-auto  <!-- 移动端：占满第二行，居中 -->
+                  md:w-auto md:flex-1 md:mx-4 md:order-2  <!-- 桌面端：中间弹性宽度 -->
+                  relative order-3">
+        <div class="relative group">
+          <input type="text" id="search-input" placeholder="搜索..." 
+                 class="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-full py-2 pl-8 sm:pl-10 pr-4 text-white text-sm
+                        placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 
+                        transition-all duration-300 group-hover:bg-white/20">
+          <i class="fa fa-search absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-white/80 group-hover:text-white transition-colors"></i>
+          <span class="absolute right-4 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-white/60 rounded-full opacity-0 group-hover:opacity-100 animate-ping"></span>
+        </div>
+        
+        <!-- 搜索结果容器 -->
+        <div id="search-results" class="search-results mt-1 bg-white/95 dark:bg-gray-800/95 rounded-xl shadow-2xl p-2 absolute 
+                                      z-500 hidden max-h-96 overflow-y-auto overflow-x-hidden
+                                      border border-gray-200 dark:border-gray-700">
+        </div>
+      </div>
+      
+      <!-- 右侧功能区：移动端第一行右侧，桌面端右侧 -->
+      <div class="flex items-center gap-2 flex-shrink-0 
+                  order-2 md:order-3  <!-- 移动端：第一行右侧；桌面端：第三顺位（最右侧） -->
+                  justify-end">  <!-- 确保内容靠右对齐 -->
+        <!-- 菜单按钮（仅移动端显示） -->
+        <button id="menu-toggle" class="md:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors active:bg-white/20 active:scale-95">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+        
+        <!-- 桌面端导航菜单（仅桌面端显示） -->
+        <nav id="main-nav" class="hidden md:flex space-x-1">
+          <a href="/Static-Blog/" class="px-4 py-2 rounded-full text-sm font-medium 
+ 
+                hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
+            <i class="fa fa-home"></i>
+            <span class="hidden sm:inline">首页</span>
+          </a>
+          <a href="/Static-Blog/page/1/" class="px-4 py-2 rounded-full text-sm font-medium 
+ 
+                hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
+            <i class="fa fa-book"></i>
+            <span class="hidden sm:inline">文章</span>
+          </a>
+          <a href="/Static-Blog/tags/" class="px-4 py-2 rounded-full text-sm font-medium 
+bg-white/20 backdrop-blur-sm shadow-md 
+                hover:bg-white/10 transition-all duration-300 flex items-center gap-1">
+            <i class="fa fa-tags"></i>
+            <span class="hidden sm:inline">标签</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 移动端菜单（全屏覆盖式） -->
+  <div id="mobileMenu" class="md:hidden bg-gradient-to-b from-primary/95 to-secondary/95 backdrop-blur-lg fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="container mx-auto px-4 py-20 h-full flex flex-col">
+      <div class="flex justify-end mb-10">
+        <button id="menu-close" class="text-white p-2 rounded-full hover:bg-white/10 transition-colors active:bg-white/20 active:scale-95">
+          <i class="fa fa-times text-2xl"></i>
+        </button>
+      </div>
+      <div class="flex flex-col space-y-6 items-center text-center">
+        <a href="/Static-Blog/" class="px-8 py-4 rounded-full text-xl font-medium text-white/90 
+ 
+              hover:bg-white/10 transition-all duration-300 w-full max-w-xs">
+          <i class="fa fa-home mr-2"></i>首页
+        </a>
+        <a href="/Static-Blog/page/1/" class="px-8 py-4 rounded-full text-xl font-medium text-white/90 
+ 
+              hover:bg-white/10 transition-all duration-300 w-full max-w-xs">
+          <i class="fa fa-book mr-2"></i>文章
+        </a>
+        <a href="/Static-Blog/tags/" class="px-8 py-4 rounded-full text-xl font-medium text-white/90 
+bg-white/20 backdrop-blur-sm shadow-md 
+              hover:bg-white/10 transition-all duration-300 w-full max-w-xs">
+          <i class="fa fa-tags mr-2"></i>标签
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 菜单遮罩层 -->
+  <div id="menu-overlay" class="md:hidden fixed inset-0 bg-black/50 z-30 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+</header>
+
+<!-- 高清图标绘制脚本 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const canvas = document.getElementById('logo-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // 书签图标配置
+  const config = {
+    icon: "\uf15c", // 书签图标Unicode
+    iconSize: 72,
+    backgroundColor: ["#165DFF", "#7B61FF"],
+    borderRadius: 24,
+    iconColor: "white",
+    scale: 4
+  };
+  
+  // 绘制高清图标
+  function drawHighResIcon() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // 渐变背景
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, config.backgroundColor[0]);
+    gradient.addColorStop(1, config.backgroundColor[1]);
+    
+    // 圆角矩形背景（抗锯齿处理）
+    ctx.beginPath();
+    const radius = config.borderRadius;
+    ctx.moveTo(radius, 0);
+    ctx.lineTo(canvas.width - radius, 0);
+    ctx.arcTo(canvas.width, 0, canvas.width, radius, radius);
+    ctx.lineTo(canvas.width, canvas.height - radius);
+    ctx.arcTo(canvas.width, canvas.height, canvas.width - radius, canvas.height, radius);
+    ctx.lineTo(radius, canvas.height);
+    ctx.arcTo(0, canvas.height, 0, canvas.height - radius, radius);
+    ctx.lineTo(0, radius);
+    ctx.arcTo(0, 0, radius, 0, radius);
+    ctx.closePath();
+    
+    // 阴影增强立体感
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 2;
+    
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    
+    // 绘制图标
+    ctx.fillStyle = config.iconColor;
+    ctx.font = `normal normal normal ${config.iconSize}px FontAwesome`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(config.icon, canvas.width / 2, canvas.height / 2);
+    
+    // 高光效果
+    const highlight = ctx.createLinearGradient(
+      canvas.width * 0.2, 
+      canvas.height * 0.2, 
+      canvas.width * 0.8, 
+      canvas.height * 0.8
+    );
+    highlight.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+    highlight.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width * 0.35, 0, Math.PI * 2);
+    ctx.fillStyle = highlight;
+    ctx.fill();
+  }
+  
+  // 检查Font Awesome加载状态
+  function isFontAwesomeLoaded() {
+    const testSpan = document.createElement('span');
+    testSpan.innerHTML = '&#xf000;';
+    testSpan.style.fontFamily = 'FontAwesome';
+    testSpan.style.position = 'absolute';
+    testSpan.style.visibility = 'hidden';
+    document.body.appendChild(testSpan);
+    const isLoaded = testSpan.offsetWidth > 0;
+    document.body.removeChild(testSpan);
+    return isLoaded;
+  }
+  
+  // 初始化图标
+  function initIcon() {
+    if (isFontAwesomeLoaded()) {
+      drawHighResIcon();
+    } else {
+      setTimeout(initIcon, 100);
+    }
+  }
+  
+  initIcon();
+  window.addEventListener('resize', drawHighResIcon);
+});
+</script>
+
+<!-- 核心交互脚本 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // 元素获取
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuClose = document.getElementById("menu-close");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const menuOverlay = document.getElementById("menu-overlay");
+  const searchInput = document.getElementById("search-input");
+  const searchResults = document.getElementById("search-results");
+  
+  // 移动端菜单展开
+  function openMenu() {
+    mobileMenu.classList.remove("translate-x-full");
+    mobileMenu.classList.add("translate-x-0");
+    menuOverlay.classList.remove("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "hidden";
+    closeSearchResults();
+  }
+  
+  // 移动端菜单收起
+  function closeMenu() {
+    mobileMenu.classList.add("translate-x-full");
+    mobileMenu.classList.remove("translate-x-0");
+    menuOverlay.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "";
+  }
+  
+  // 关闭搜索结果并清除样式
+  function closeSearchResults() {
+    if (!searchResults) return;
+    searchResults.classList.add('hidden');
+    searchResults.removeAttribute('style');
+    document.documentElement.style.zoom = '1';
+    document.body.scrollLeft = 0;
+  }
+  
+  // 更新搜索结果位置
+  function updateSearchPosition() {
+    if (!searchInput || !searchResults || searchResults.classList.contains('hidden')) return;
+    
+    const inputRect = searchInput.getBoundingClientRect();
+    const containerRect = searchInput.closest('.search-container').getBoundingClientRect();
+    const isMobile = window.innerWidth < 768; // 与md断点一致
+    
+    searchResults.style.top = `${inputRect.height + 4}px`;
+    searchResults.style.maxHeight = '384px';
+    
+    if (isMobile) {
+      // 移动端：搜索结果与搜索栏同宽，居中
+      searchResults.style.width = `${inputRect.width}px`;
+      searchResults.style.left = '50%';
+      searchResults.style.transform = 'translateX(-50%)';
+    } else {
+      // 桌面端：搜索结果与搜索栏同宽，左对齐
+      searchResults.style.width = `${inputRect.width}px`;
+      searchResults.style.left = '0';
+      searchResults.style.transform = 'none';
+    }
+  }
+  
+  // 绑定菜单事件
+  if (menuToggle) menuToggle.addEventListener("click", openMenu);
+  if (menuClose) menuClose.addEventListener("click", closeMenu);
+  if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+  
+  // 搜索框事件
+  if (searchInput) {
+    searchInput.addEventListener('focus', function() {
+      if (searchResults) {
+        searchResults.classList.remove('hidden');
+        updateSearchPosition();
+      }
+    });
+    
+    searchInput.addEventListener("blur", function() {
+      if (searchResults && !searchResults.contains(event.relatedTarget)) {
+        setTimeout(closeSearchResults, 200);
+      }
+    });
+    
+    searchInput.addEventListener('input', updateSearchPosition);
+  }
+  
+  // 窗口大小变化时更新（防抖处理）
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      updateSearchPosition();
+      if (window.innerWidth >= 768) { // 与md断点一致
+        closeMenu();
+      }
+    }, 100);
+  });
+  
+  window.addEventListener('scroll', updateSearchPosition);
+  updateSearchPosition();
+});
+</script>
+
+<!-- 引入搜索脚本 -->
+<script src="/Static-Blog/scripts/search.js"></script>
+<script src="/Static-Blog/styles/main.js"></script>
+    <!-- 博客内容区域 -->
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+    <!-- 标签页标题区 -->
+    <div class="mb-12 relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary/5 to-secondary/5 p-6 md:p-8">
+        <!-- 背景装饰元素 -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-secondary/10 rounded-full filter blur-3xl"></div>
+        
+        <div class="relative z-10">
+            <h2 class="text-2xl md:text-3xl font-bold flex items-center">
+                <i class="fa fa-tags text-primary mr-3"></i>
+                标签：追剧成瘾
+                <span class="ml-4 text-sm font-normal text-gray-500 bg-white/80 dark:bg-gray-800/80 px-3 py-1 rounded-full">
+                    共 1 篇文章
+                </span>
+            </h2>
+            <p class="text-gray-600 mt-2 max-w-2xl">
+                包含标签 <strong class="text-primary">追剧成瘾</strong> 的相关文章
+            </p>
+            
+            <!-- 标签云微缩展示 -->
+            <div class="mt-6 flex flex-wrap gap-2">
+            </div>
+        </div>
+    </div>
+
+    <!-- 全部文章区域 - 使用通用文章列表组件 -->
+    <div class="content-container">
+        <div class="post-list space-y-8">
+<div class="space-y-6">
+      <article class="post-summary bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 group relative">
+        
+          <div class="absolute top-4 right-4 z-10 bg-accent text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+            <i class="fa fa-star"></i> 精选
+          </div>
+        
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="md:w-1/3">
+            <div class="rounded-lg overflow-hidden h-40 md:h-full">
+              <img 
+                src="/Static-Blog/styles/images/Cloud.jpg" 
+                alt="【追剧沉迷】关于熬夜追剧的精神报告" 
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              >
+            </div>
+          </div>
+          <div class="md:w-2/3">
+            <!-- 1. 发布时间 + 修改时间 -->
+            <div class="post-meta flex items-center text-sm mt-2 mb-3">
+                <div class="flex items-center mr-4">
+                    <i class="fa fa-calendar-o mr-1 text-primary"></i>
+                    <span class="text-gray-500 dark:text-gray-400">2025年03月03日</span>
+                </div>
+  <span class="text-gray-500 dark:text-gray-400">
+    <i class="fa fa-refresh mr-1 text-secondary"></i>
+    更新于 143天前
+  </span>
+            </div>
+            
+            <!-- 2. 标题 -->
+            <h2 class="text-xl font-bold">
+                <a href="/Static-Blog/posts/article (19)/" class="text-dark dark:text-white hover:text-primary transition-colors group-hover:underline">
+                    【追剧沉迷】关于熬夜追剧的精神报告
+                </a>
+            </h2>
+
+            <!-- 新增：作者信息 -->
+            <div class="flex items-center text-gray-600 dark:text-gray-400 mb-3 text-sm mt-3">
+                <i class="fa fa-user-circle-o mr-2 text-primary"></i>
+                <span>追剧达人</span>
+            </div>
+            
+            <!-- 3. 标签和阅读更多 -->
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="post-tags flex flex-wrap gap-2">
+                        <a href="/Static-Blog/tags/追剧成瘾/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #追剧成瘾
+                        </a>
+                        <a href="/Static-Blog/tags/熬夜看剧/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #熬夜看剧
+                        </a>
+                        <a href="/Static-Blog/tags/剧情上头/" class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-colors">
+                            #剧情上头
+                        </a>
+                </div>
+                
+                <!-- 4. 阅读更多 -->
+                <a href="/Static-Blog/posts/article (19)/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
+                    阅读更多 <i class="fa fa-angle-right ml-1"></i>
+                </a>
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <!-- 分隔线 -->
+</div>        </div>
+    </div>
+
+    <!-- 分页导航 -->
+    
+    <!-- 装饰性元素 -->
+    <div class="fixed -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="fixed -top-20 -right-20 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl pointer-events-none"></div>
+    </main>
+
+    <!-- 引入独立页脚 -->
+<footer class="bg-gradient-to-r from-primary to-secondary text-white mt-16 relative overflow-hidden">
+  <!-- 粒子容器 -->
+  <div class="footer-particles absolute inset-0 z-0"></div>
+  
+  <div class="container mx-auto px-4 py-12 max-w-5xl relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+      <div class="w-full text-center md:text-left">
+        <h3 class="text-xl font-bold mb-4 flex items-center justify-center md:justify-start">
+          <i class="fa fa-feather text-white mr-2"></i>
+          酱姆(≧∇≦)ﾉ
+        </h3>
+        <p class="text-white/80 mb-4">
+          
+        </p>
+<div class="flex space-x-4 justify-center md:justify-start">
+  <!-- GitHub -->
+  <a href="https://github.com/164321595" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="text-white/80 hover:text-white transition-custom" 
+     aria-label="GitHub">
+    <i class="fa fa-github text-xl transform hover:rotate-12 transition-transform"></i>
+  </a>
+  
+  <!-- Bilibili -->
+  <a href="https://space.bilibili.com/386841039?spm_id_from=333.1007.0.0" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="text-white/80 hover:text-white transition-custom" 
+     aria-label="Bilibili">
+    <img 
+      src="/Static-Blog/styles/images/bilibili.png" 
+      alt="B站图标" 
+      class="inline-block w-6 h-6 object-contain transform hover:scale-110 transition-transform"
+    >
+  </a>
+  
+  <!-- LinkedIn -->
+  <a href="#" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="text-white/80 hover:text-white transition-custom" 
+     aria-label="LinkedIn">
+    <i class="fa fa-linkedin text-xl transform hover:-rotate-6 transition-transform"></i>
+  </a>
+  
+  <!-- RSS -->
+  <a href="#" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="text-white/80 hover:text-white transition-custom" 
+     aria-label="RSS">
+    <i class="fa fa-rss text-xl transform hover:scale-110 transition-transform"></i>
+  </a>
+</div>
+      </div>
+      
+      <div class="w-full text-center md:text-left">
+        <h3 class="text-lg font-bold mb-4 text-center md:text-left">
+          快速链接
+        </h3>
+        <ul class="space-y-2">
+          <li><a href="/Static-Blog/" class="text-white/80 hover:text-white transition-all duration-300 hover:pl-1">首页</a></li>
+          <li><a href="/Static-Blog/page/1/" class="text-white/80 hover:text-white transition-all duration-300 hover:pl-1">文章</a></li>
+          <li><a href="/Static-Blog/tags/" class="text-white/80 hover:text-white transition-all duration-300 hover:pl-1">标签</a></li>
+          <li><a href="/Static-Blog/about/" class="text-white/80 hover:text-white transition-all duration-300 hover:pl-1">关于</a></li>
+          <li><a href="/Static-Blog/sitemap.xml" class="text-white/80 hover:text-white transition-all duration-300 hover:pl-1">站点地图</a></li>
+        </ul>
+      </div>
+      
+      <div class="w-full text-center md:text-left">
+        <h3 class="text-lg font-bold mb-4 text-center md:text-left">
+          订阅更新
+        </h3>
+        <p class="text-white/80 mb-4">获取最新文章和通知</p>
+              </div>
+    </div>
+    
+    <div class="border-t border-white/20 mt-10 pt-6 text-center text-white/60 text-sm">
+      <p>&copy; 2025 酱姆(≧∇≦)ﾉ. 保留所有权利.</p>
+      <div class="mt-2 flex justify-center space-x-4 text-xs">
+        <a href="#" class="hover:text-white transition-colors">隐私政策</a>
+        <a href="#" class="hover:text-white transition-colors">使用条款</a>
+        <a href="#" class="hover:text-white transition-colors">联系我们</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 增强版粒子特效脚本 -->
+<script>
+// 生成动态粒子（速度优化版）
+function createParticles(containerClass, count) {
+  const container = document.querySelector(containerClass);
+  if (!container) return;
+  
+  container.innerHTML = ''; // 清空容器
+  
+  // 粒子大小分组（增强层次感）
+  const sizeGroups = [
+    { min: 1, max: 3, proportion: 0.5 },  // 小粒子（50%）
+    { min: 3, max: 6, proportion: 0.3 },  // 中粒子（30%）
+    { min: 6, max: 10, proportion: 0.2 }  // 大粒子（20%）
+  ];
+  
+  let created = 0;
+  
+  // 按大小分组生成粒子
+  sizeGroups.forEach(group => {
+    const groupCount = Math.floor(count * group.proportion);
+    
+    for (let i = 0; i < groupCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // 随机属性（加快速度，增强视觉效果）
+      const size = Math.random() * (group.max - group.min) + group.min;
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const duration = Math.random() * 3 + 2; // 速度提升：3-7秒/周期（原10-20秒）
+      const delay = Math.random() * 2; // 缩短延迟：0-2秒
+      const opacity = Math.random() * 0.5 + 0.3; // 提高可见度：0.3-0.8
+      const isHorizontal = Math.random() > 0.5; // 50%粒子带横向运动
+      
+      // 应用样式
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${x}%`;
+      particle.style.top = `${y}%`;
+      particle.style.opacity = opacity;
+      particle.style.animationDelay = `${delay}s`;
+      
+      // 复合动画（上下浮动+随机横向移动）
+      if (isHorizontal) {
+        particle.style.animation = `
+          float ${duration}s ease-in-out infinite,
+          drift ${(duration * 1.5) + Math.random() * 2}s ease-in-out infinite alternate
+        `;
+      } else {
+        particle.style.animation = `float ${duration}s ease-in-out infinite`;
+      }
+      
+      // 随机添加发光效果（增强阳光感）
+      if (Math.random() > 0.7) {
+        particle.style.boxShadow = `0 0 ${size * 2}px rgba(255, 255, 255, 0.6)`;
+      }
+      
+      container.appendChild(particle);
+      created++;
+    }
+  });
+  
+  // 补充剩余粒子（处理四舍五入误差）
+  while (created < count) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.width = '3px';
+    particle.style.height = '3px';
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.opacity = 0.5;
+    particle.style.animation = `float 5s ease-in-out infinite`;
+    container.appendChild(particle);
+    created++;
+  }
+}
+
+// 粒子样式（增强动画效果）
+const style = document.createElement('style');
+style.textContent = `
+  .header-particles, .footer-particles { overflow: hidden; }
+  
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* 页眉粒子更亮 */
+  .header-particles .particle {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  
+  /* 浮动动画（加大幅度） */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(10deg); /* 加大浮动距离和旋转角度 */
+    }
+  }
+  
+  /* 横向漂移动画 */
+  @keyframes drift {
+    0% {
+      transform: translateX(-15px);
+    }
+    100% {
+      transform: translateX(15px);
+    }
+  }
+  
+  /* 滚动时的视差效果 */
+  .header-particles {
+    transform: translateY(var(--scroll-y, 0));
+    transition: transform 0.1s ease-out;
+  }
+  
+  .footer-particles {
+    transform: translateY(calc(var(--scroll-y, 0) * -0.5));
+    transition: transform 0.1s ease-out;
+  }
+`;
+document.head.appendChild(style);
+
+// 初始化粒子
+window.addEventListener('DOMContentLoaded', () => {
+  createParticles('.header-particles', 40); // 页眉粒子（增加数量）
+  createParticles('.footer-particles', 35); // 页脚粒子（增加数量）
+  
+  // 滚动视差效果
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    document.documentElement.style.setProperty('--scroll-y', `${scrollY * 0.1}px`);
+  });
+});
+
+// 窗口大小改变时重绘粒子
+window.addEventListener('resize', () => {
+  createParticles('.header-particles', 40);
+  createParticles('.footer-particles', 35);
+});
+</script>
+
+
+    <!-- 回到顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-primary/90 hover:scale-110 z-50">
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <!-- 滚动进度条 -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-primary z-50 transform origin-left scale-x-0 transition-transform duration-300"></div>
+
+    <script>
+        // 回到顶部按钮
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            // 显示/隐藏回到顶部按钮
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+            
+            // 更新滚动进度条
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.transform = `scaleX(${scrolled / 100})`;
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
