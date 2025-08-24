@@ -41,13 +41,16 @@
                     {{ post.title }}
                 </a>
             </h2>
+
+            <!-- 新增：作者信息 -->
+             {% if post.author %}
+            <div class="flex items-center text-gray-600 dark:text-gray-400 mb-3 text-sm mt-3">
+                <i class="fa fa-user-circle-o mr-2 text-primary"></i>
+                <span>{{ post.author }}</span>
+            </div>
+            {% endif %}
             
-            <!-- 3. 文章摘要 -->
-            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-lg">
-                {{ post.excerpt | safe | striptags | truncate(180) }}
-            </p>
-            
-            <!-- 4. 标签和阅读更多 -->
+            <!-- 3. 标签和阅读更多 -->
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="post-tags flex flex-wrap gap-2">
                     {% for tag in post.tags.slice(0, 3) %}
@@ -57,7 +60,7 @@
                     {% endfor %}
                 </div>
                 
-                <!-- 5. 阅读更多 -->
+                <!-- 4. 阅读更多 -->
                 <a href="{{ config.baseUrl }}/posts/{{ post.slug }}/" class="inline-flex items-center text-primary font-medium mt-4 hover:text-secondary hover:underline">
                     阅读更多 <i class="fa fa-angle-right ml-1"></i>
                 </a>
@@ -88,4 +91,3 @@
     </div>
   {% endif %}
 </div>
-    
